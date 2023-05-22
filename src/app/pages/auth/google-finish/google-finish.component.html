@@ -1,0 +1,108 @@
+<div class="flex">
+  <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+    <div class="mx-auto w-full max-w-sm lg:w-96">
+      <div>
+        <img class="h-12 w-auto" src="assets/small-logo.svg">
+        <h2 class="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">Finish Registration</h2>
+      </div>
+
+
+      <div class="mt-6">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+
+          <input type="hidden" formControlName="token">
+          <input type="hidden" formControlName="image">
+
+          <p *ngIf="submitted && f['token'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
+            <span *ngIf="f['token'].errors?.['required']">Token is missing</span>
+          </p>
+
+
+          <div class="space-y-1 mb-4">
+            <label for="firstName"
+                   class="block mb-2 text-sm font-medium"
+                   [ngClass]="{
+                       'label-invalid': submitted && f['email'].errors,
+                       'label-valid': submitted &&  !f['email'].errors,
+                       'text-gray-900 dark:text-white': !submitted
+                     }"
+            >
+              First Name
+            </label>
+            <div class="relative mb-6">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                </svg>
+              </div>
+              <input type="text" id="firstName"
+                     formControlName="firstName"
+                     class="border text-sm rounded-lg block w-full pl-10 p-2.5"
+                     [ngClass]="{
+                        'input-invalid': submitted && f['firstName'].errors,
+                        'input-valid': submitted &&  !f['firstName'].errors,
+                        'bg-gray-50 border-gray-300 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500': !submitted
+                       }"
+              >
+            </div>
+            <p *ngIf="submitted && f['firstName'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
+              <span *ngIf="f['firstName'].errors?.['required']">First Name is required</span>
+            </p>
+          </div>
+
+          <div class="space-y-1 mb-4">
+            <label for="lastName"
+                   class="block mb-2 text-sm font-medium"
+                   [ngClass]="{
+                       'label-invalid': submitted && f['email'].errors,
+                       'label-valid': submitted &&  !f['email'].errors,
+                       'text-gray-900 dark:text-white': !submitted
+                     }"
+            >
+              Last Name
+            </label>
+            <div class="relative mb-6">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                </svg>
+              </div>
+              <input type="text" id="lastName"
+                     formControlName="lastName"
+                     class="border text-sm rounded-lg block w-full pl-10 p-2.5"
+                     [ngClass]="{
+                        'input-invalid': submitted && f['email'].errors,
+                        'input-valid': submitted &&  !f['email'].errors,
+                        'bg-gray-50 border-gray-300 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500': !submitted
+                       }"
+              >
+            </div>
+            <p *ngIf="submitted && f['lastName'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
+              <span *ngIf="f['lastName'].errors?.['required']">Last Name is required</span>
+            </p>
+          </div>
+
+          <div>
+            <button type="submit"
+                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-500 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+              Sign up
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="hidden lg:block relative w-0 flex-1">
+    <img class="absolute inset-0 h-full w-full object-cover"
+         src="assets/login-background.jpg"
+         alt="">
+  </div>
+</div>
+
+
+
+

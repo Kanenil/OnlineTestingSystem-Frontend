@@ -1,0 +1,39 @@
+<div
+  class="transition animate-scaleIn group relative bg-white dark:bg-gray-700 border border-gray-200 rounded-lg flex flex-col overflow-hidden dark:border-gray-600">
+  <div
+    class="flex items-start justify-center aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none h-24 dark:bg-gray-700">
+    <img *ngIf="course.course.image"
+         [src]="course.course.image"
+         [alt]="course.course.name"
+         class="w-full h-full object-center object-cover sm:w-full sm:h-full">
+    <img *ngIf="!course.course.image"
+         src="assets/no-image-course.jpg"
+         [alt]="course.course.name"
+         class="w-full h-full object-center object-cover sm:w-full sm:h-full">
+    <div class="absolute left-2 w-full my-1">
+      <h1 class="text-xl font-bold text-gray-200">{{course.course.name | truncate:20}}</h1>
+      <h1 class="text-sm font-semibold text-gray-200">{{course.course.section | truncate:20 }}</h1>
+    </div>
+  </div>
+  <div class="p-3.5 space-y-2">
+    <div *ngIf="user" class="flex-shrink-0 block">
+      <div class="flex items-center">
+        <span *ngIf="!user.image" class="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-500">
+          <span class="font-medium leading-none text-white">{{user.firstName | slice:0:1}}</span>
+        </span>
+        <div *ngIf="user.image">
+          <img class="inline-block h-9 w-9 rounded-full"
+               [src]="user.image"
+               alt="">
+        </div>
+        <div class="ml-3 overflow-x-hidden">
+          <p class="text-sm font-medium text-gray-700 dark:text-white">{{user.firstName}} {{user.lastName}}</p>
+          <p class="text-xs font-medium text-gray-500 dark:text-gray-300">{{course.role.name}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a [routerLink]="['/courses', course.course.slug]">
+    <span aria-hidden="true" class="absolute inset-0"></span>
+  </a>
+</div>
