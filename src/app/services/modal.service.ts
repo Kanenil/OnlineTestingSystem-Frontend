@@ -15,10 +15,12 @@ export class ModalService {
   show(component: any) {
     this.selectedComponentSubject.next(component);
     this.isVisibleSubject.next(true);
+    document.querySelector('body')?.classList.add('modal-open');
   }
 
   close() {
     this.isVisibleSubject.next(false);
+    document.querySelector('body')?.classList.remove('modal-open');
   }
 
 }

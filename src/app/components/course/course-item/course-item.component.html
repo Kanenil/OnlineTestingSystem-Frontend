@@ -1,41 +1,51 @@
-<div
-  class="transition animate-scaleIn group relative bg-white dark:bg-gray-700 border border-gray-200 rounded-lg flex flex-col overflow-hidden dark:border-gray-600">
-  <div
-    class="flex items-start justify-center aspect-w-3 aspect-h-4 bg-gray-200 group-hover:opacity-75 sm:aspect-none h-24 dark:bg-gray-700">
-    <img *ngIf="course.image"
-         [src]="course.image"
-         [alt]="course.name"
-         class="w-full h-full object-center object-cover sm:w-full sm:h-full">
-    <img *ngIf="!course.image"
-         src="assets/no-image-course.jpg"
-         [alt]="course.name"
-         class="w-full h-full object-center object-cover sm:w-full sm:h-full">
-    <div class="absolute left-2 w-full my-1">
-      <h1 class="text-xl font-bold text-gray-200">{{course.name | truncate:20}}</h1>
-      <h1 class="text-sm font-semibold text-gray-200">{{course.section | truncate:20 }}</h1>
-    </div>
-  </div>
-  <div class="p-3.5 space-y-2 h-32 z-10">
-    <h1 class="text-xl font-bold text-black dark:text-gray-200">Course Owner</h1>
-    <a [routerLink]="['/profile', owner.user.slug]"
-       class="flex-shrink-0 group block">
-      <div class="flex items-center">
-        <span *ngIf="!owner.user.image" class="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-500">
-          <span class="font-medium leading-none text-white">{{owner.user.firstName | slice:0:1}}</span>
-        </span>
-        <div *ngIf="owner.user.image">
-          <img class="inline-block h-9 w-9 rounded-full"
-               [src]="owner.user.image"
-               alt="">
+<div class="relative bg-white dark:bg-[#1d2144] shadow-md rounded-md overflow-hidden mb-10 animate-fadeInUp">
+  <a [routerLink]="['/courses', course.slug]" class="w-full block relative">
+<span
+  *ngIf="course.section"
+  class="absolute top-6 right-6 bg-[#4a6cf7] rounded-full inline-flex items-center justify-center py-2 px-4 font-semibold text-sm text-white">
+{{course.section}}
+</span>
+    <img *ngIf="!course.image" src="assets/no-image-course.jpg" alt="image" class="w-full">
+    <img *ngIf="course.image" [src]="course.image" alt="image" class="w-full">
+  </a>
+  <div class="p-6 sm:p-8 md:py-8 md:px-6 lg:p-8 xl:py-8 xl:px-5 2xl:p-8">
+    <h3>
+      <a [routerLink]="['/courses', course.slug]"
+         class="font-bold text-black dark:text-white text-xl sm:text-2xl block mb-4 hover:text-[#4a6cf7] dark:hover:text-[#4a6cf7]">
+        {{course.name}}
+      </a>
+    </h3>
+    <p *ngIf="course.description"
+       class="text-base text-[#959cb1] font-medium pb-6 mb-6 border-b border-[#959cb1] border-opacity-10 dark:border-white dark:border-opacity-10">
+      {{course.description}}
+    </p>
+    <p *ngIf="!course.description"
+       class="text-base text-[#959cb1] font-medium pb-6 mb-6 border-b border-[#959cb1] border-opacity-10 dark:border-white dark:border-opacity-10">
+      No description to this course
+    </p>
+    <div class="flex items-center">
+      <div
+        class="flex items-center pr-5 mr-5 xl:pr-3 2xl:pr-5 xl:mr-3 2xl:mr-5 border-r border-[#959cb1] border-opacity-10 dark:border-white dark:border-opacity-10">
+        <div class="max-w-[40px] w-full h-[40px] rounded-full overflow-hidden mr-4">
+          <img *ngIf="owner.user.image" [src]="owner.user.image" alt="author" class="w-full">
+          <span *ngIf="!owner.user.image"
+                class="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-500">
+                <span class="font-medium leading-none text-white">{{owner.user.firstName | slice:0:1}}</span>
+              </span>
         </div>
-        <div class="ml-3 overflow-x-hidden">
-          <p class="text-sm font-medium text-gray-700 dark:text-white group-hover:text-gray-900 dark:group-hover:text-gray-50">{{owner.user.firstName}} {{owner.user.lastName}}</p>
-          <p class="text-xs font-medium text-gray-500 dark:text-gray-300 group-hover:text-gray-700 dark:group-hover:text-gray-200">View profile</p>
+        <div class="w-full">
+          <h4 class="text-sm font-medium text-dark dark:text-white mb-1">
+            <a [routerLink]="['/profile', owner.user.slug]"
+               class="text-dark dark:text-white hover:text-[#4a6cf7] dark:hover:text-[#4a6cf7]">
+              {{owner.user.firstName}} {{owner.user.lastName}} </a>
+          </h4>
+          <p class="text-xs text-[#959cb1]">Owner</p>
         </div>
       </div>
-    </a>
+      <div class="inline-block">
+        <h4 class="text-sm font-medium text-[#1d2144] dark:text-white mb-1">Joined</h4>
+        <p class="text-xs text-[#959cb1]">{{course.users.length}} people</p>
+      </div>
+    </div>
   </div>
-  <a [routerLink]="['/courses', course.slug]">
-    <span aria-hidden="true" class="absolute inset-0"></span>
-  </a>
 </div>

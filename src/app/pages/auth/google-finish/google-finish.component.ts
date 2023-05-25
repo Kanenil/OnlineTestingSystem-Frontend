@@ -18,6 +18,7 @@ export class GoogleFinishComponent implements OnInit {
     lastName: new FormControl(''),
     image: new FormControl(''),
     token: new FormControl(''),
+    terms: new FormControl(false),
   });
   submitted = false;
 
@@ -37,6 +38,7 @@ export class GoogleFinishComponent implements OnInit {
           lastName: [params['lastName'], [Validators.required]],
           image: [params['image']],
           token: [params['token'], Validators.required],
+          terms: [false, Validators.requiredTrue]
         }
       );
     })

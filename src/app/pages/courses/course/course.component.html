@@ -1,263 +1,456 @@
-<div *ngIf="course">
-  <div class="relative">
-    <img *ngIf="course.image"
-         class="h-32 w-full object-cover lg:h-48"
-         [src]="course.image"
-         alt="">
-    <img *ngIf="!course.image"
-         class="h-32 w-full object-cover lg:h-48"
-         src="assets/no-image-course.jpg"
-         alt="">
+<!--<div *ngIf="course">-->
+<!--  <div class="relative">-->
+<!--    <img *ngIf="course.image"-->
+<!--         class="h-32 w-full object-cover lg:h-48"-->
+<!--         [src]="course.image"-->
+<!--         alt="">-->
+<!--    <img *ngIf="!course.image"-->
+<!--         class="h-32 w-full object-cover lg:h-48"-->
+<!--         src="assets/no-image-course.jpg"-->
+<!--         alt="">-->
 
-    <div class="absolute left-2 bottom-2 w-full">
-      <h1 class="text-3xl font-bold text-gray-200">{{course.name}}</h1>
-      <h1 class="text-2xl font-semibold text-gray-200">{{course.section}}</h1>
-    </div>
+<!--    <div class="absolute left-2 bottom-2 w-full">-->
+<!--      <h1 class="text-3xl font-bold text-gray-200">{{course.name}}</h1>-->
+<!--      <h1 class="text-2xl font-semibold text-gray-200">{{course.section}}</h1>-->
+<!--    </div>-->
 
-    <div class="absolute right-2 bottom-2 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
-      <button (click)="joinCourse()" *ngIf="!isInCourse && loginedUser" type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-green-700 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-ml-1 mr-3 h-5 w-5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
-        </svg>
-        Join to course
-      </button>
-      <button (click)="leaveCourse()" *ngIf="isInCourse && loginedUser && owner.user.email !== loginedUser.email" type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-ml-1 mr-3 h-5 w-5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-        Leave from course
-      </button>
-      <button *ngIf="isInCourse && loginedUser && owner.user.email === loginedUser.email" type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-ml-1 mr-3 h-5 w-5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-        Delete course
-      </button>
-    </div>
+<!--    <div class="absolute right-2 bottom-2 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">-->
+<!--      <button (click)="joinCourse()" *ngIf="!isInCourse && loginedUser" type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-green-700 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">-->
+<!--        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-ml-1 mr-3 h-5 w-5">-->
+<!--          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />-->
+<!--        </svg>-->
+<!--        Join to course-->
+<!--      </button>-->
+<!--      <button (click)="leaveCourse()" *ngIf="isInCourse && loginedUser && owner.user.email !== loginedUser.email" type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">-->
+<!--        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-ml-1 mr-3 h-5 w-5">-->
+<!--          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />-->
+<!--        </svg>-->
+<!--        Leave from course-->
+<!--      </button>-->
+<!--      <button *ngIf="isInCourse && loginedUser && owner.user.email === loginedUser.email" type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">-->
+<!--        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-ml-1 mr-3 h-5 w-5">-->
+<!--          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />-->
+<!--        </svg>-->
+<!--        Delete course-->
+<!--      </button>-->
+<!--    </div>-->
 
-    <div *ngIf="loginedUser?.email === owner.user.email" class="absolute right-2 top-3">
-      <button type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700">
-        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2 -ml-1">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-        </svg>
-        Setup
-      </button>
-    </div>
-  </div>
-</div>
-<div *ngIf="isInCourse" class="grid grid-cols-5 grid-rows-2 gap-x-0 gap-y-0">
-  <div class="relative h-[130px] dark:bg-gray-700 p-6 mt-6 mr-5 border-2 border-gray-300 rounded-2xl">
-    <h1 class="text-xl font-semibold text-black dark:text-gray-200">Course code</h1>
-    <h1 class="text-2xl font-bold text-blue-500">{{course?.code}}</h1>
-  </div>
+<!--    <div *ngIf="loginedUser?.email === owner.user.email" class="absolute right-2 top-3">-->
+<!--      <button type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700">-->
+<!--        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2 -ml-1">-->
+<!--          <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />-->
+<!--        </svg>-->
+<!--        Setup-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div *ngIf="isInCourse" class="grid grid-cols-5 grid-rows-2 gap-x-0 gap-y-0">-->
+<!--  <div class="relative h-[130px] dark:bg-gray-700 p-6 mt-6 mr-5 border-2 border-gray-300 rounded-2xl">-->
+<!--    <h1 class="text-xl font-semibold text-black dark:text-gray-200">Course code</h1>-->
+<!--    <h1 class="text-2xl font-bold text-blue-500">{{course?.code}}</h1>-->
+<!--  </div>-->
 
-  <form *ngIf="loginedUser?.email === owner.user.email" class="col-span-4 mt-6 relative">
-    <div class="border border-gray-300 rounded-lg shadow-sm overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
-      <label for="title" class="sr-only">Title</label>
-      <input type="text" name="title" id="title" class="block dark:bg-gray-700 w-full border-0 pt-2.5 text-lg font-medium placeholder-gray-500 dark:placeholder-gray-200 dark:text-white focus:ring-0" placeholder="Title">
-      <label for="description" class="sr-only">Description</label>
-      <textarea rows="5" name="description" id="description" class="block dark:bg-gray-700 w-full border-0 py-0 resize-none placeholder-gray-500 dark:placeholder-gray-200 dark:text-white focus:ring-0 sm:text-sm" placeholder="Write a description..."></textarea>
+<!--  <form *ngIf="loginedUser?.email === owner.user.email" class="col-span-4 mt-6 relative">-->
+<!--    <div class="border border-gray-300 rounded-lg shadow-sm overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">-->
+<!--      <label for="title" class="sr-only">Title</label>-->
+<!--      <input type="text" name="title" id="title" class="block dark:bg-gray-700 w-full border-0 pt-2.5 text-lg font-medium placeholder-gray-500 dark:placeholder-gray-200 dark:text-white focus:ring-0" placeholder="Title">-->
+<!--      <label for="description" class="sr-only">Description</label>-->
+<!--      <textarea rows="5" name="description" id="description" class="block dark:bg-gray-700 w-full border-0 py-0 resize-none placeholder-gray-500 dark:placeholder-gray-200 dark:text-white focus:ring-0 sm:text-sm" placeholder="Write a description..."></textarea>-->
 
-      <div aria-hidden="true" class="dark:bg-gray-700">
-        <div class="py-2">
-          <div class="h-9"></div>
-        </div>
-        <div class="h-px"></div>
-        <div class="py-2">
-          <div class="py-px">
-            <div class="h-9"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+<!--      <div aria-hidden="true" class="dark:bg-gray-700">-->
+<!--        <div class="py-2">-->
+<!--          <div class="h-9"></div>-->
+<!--        </div>-->
+<!--        <div class="h-px"></div>-->
+<!--        <div class="py-2">-->
+<!--          <div class="py-px">-->
+<!--            <div class="h-9"></div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
 
-    <div class="absolute bottom-0 inset-x-px">
-      <div class="flex flex-nowrap justify-end py-2 px-2 space-x-2 sm:px-3">
-        <div class="flex-shrink-0">
-          <label id="listbox-label" class="sr-only"> Assign </label>
+<!--    <div class="absolute bottom-0 inset-x-px">-->
+<!--      <div class="flex flex-nowrap justify-end py-2 px-2 space-x-2 sm:px-3">-->
+<!--        <div class="flex-shrink-0">-->
+<!--          <label id="listbox-label" class="sr-only"> Assign </label>-->
+<!--          <div class="relative">-->
+<!--            <button type="button" class="relative inline-flex items-center rounded-full py-2 px-2 bg-gray-50 text-sm font-medium text-gray-500 whitespace-nowrap hover:bg-gray-100 sm:px-3" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">-->
+<!--              &lt;!&ndash;-->
+<!--                Placeholder icon, show/hide based on listbox state.-->
+
+<!--                Heroicon name: solid/user-circle-->
+<!--              &ndash;&gt;-->
+<!--              <svg class="flex-shrink-0 h-5 w-5 text-gray-300 sm:-ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">-->
+<!--                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />-->
+<!--              </svg>-->
+
+<!--              &lt;!&ndash; Selected user avatar, show/hide based on listbox state. &ndash;&gt;-->
+<!--              <img src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="flex-shrink-0 h-5 w-5 rounded-full">-->
+
+<!--              &lt;!&ndash; Selected: "text-gray-900" &ndash;&gt;-->
+<!--              <span class="hidden truncate sm:ml-2 sm:block"> Assign </span>-->
+<!--            </button>-->
+
+<!--            &lt;!&ndash;-->
+<!--              Select popover, show/hide based on select state.-->
+
+<!--              Entering: ""-->
+<!--                From: ""-->
+<!--                To: ""-->
+<!--              Leaving: "transition ease-in duration-100"-->
+<!--                From: "opacity-100"-->
+<!--                To: "opacity-0"-->
+<!--            &ndash;&gt;-->
+<!--            <ul class="hidden absolute right-0 z-10 mt-1 w-52 bg-white shadow max-h-56 rounded-lg py-3 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-0">-->
+<!--              &lt;!&ndash;-->
+<!--                Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.-->
+
+<!--                Highlighted: "bg-gray-100", Not Highlighted: "bg-white"-->
+<!--              &ndash;&gt;-->
+<!--              <li class="bg-white cursor-default select-none relative py-2 px-3" id="listbox-option-0" role="option">-->
+<!--                <div class="flex items-center">-->
+<!--                  &lt;!&ndash; Heroicon name: solid/user-circle &ndash;&gt;-->
+<!--                  <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">-->
+<!--                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />-->
+<!--                  </svg>-->
+<!--                  <span class="ml-3 block font-medium truncate"> Unassigned </span>-->
+<!--                </div>-->
+<!--              </li>-->
+
+<!--              &lt;!&ndash;-->
+<!--                Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.-->
+
+<!--                Highlighted: "bg-gray-100", Not Highlighted: "bg-white"-->
+<!--              &ndash;&gt;-->
+<!--              <li class="bg-white cursor-default select-none relative py-2 px-3" id="listbox-option-1" role="option">-->
+<!--                <div class="flex items-center">-->
+<!--                  <img src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="flex-shrink-0 h-5 w-5 rounded-full">-->
+<!--                  <span class="ml-3 block font-medium truncate"> Wade Cooper </span>-->
+<!--                </div>-->
+<!--              </li>-->
+
+<!--              &lt;!&ndash; More items... &ndash;&gt;-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="flex-shrink-0">-->
+<!--          <label id="listbox-label" class="sr-only"> Add a label </label>-->
+<!--          <div class="relative">-->
+<!--            <button type="button" class="relative inline-flex items-center rounded-full py-2 px-2 bg-gray-50 text-sm font-medium text-gray-500 whitespace-nowrap hover:bg-gray-100 sm:px-3" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">-->
+<!--              &lt;!&ndash;-->
+<!--                Heroicon name: solid/tag-->
+
+<!--                Selected: "text-gray-300", Default: "text-gray-500"-->
+<!--              &ndash;&gt;-->
+<!--              <svg class="text-gray-300 flex-shrink-0 h-5 w-5 sm:-ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">-->
+<!--                <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />-->
+<!--              </svg>-->
+<!--              &lt;!&ndash; Selected: "text-gray-900" &ndash;&gt;-->
+<!--              <span class="hidden truncate sm:ml-2 sm:block"> Label </span>-->
+<!--            </button>-->
+
+<!--            &lt;!&ndash;-->
+<!--              Select popover, show/hide based on select state.-->
+
+<!--              Entering: ""-->
+<!--                From: ""-->
+<!--                To: ""-->
+<!--              Leaving: "transition ease-in duration-100"-->
+<!--                From: "opacity-100"-->
+<!--                To: "opacity-0"-->
+<!--            &ndash;&gt;-->
+<!--            <ul class="hidden absolute right-0 z-10 mt-1 w-52 bg-white shadow max-h-56 rounded-lg py-3 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-0">-->
+<!--              &lt;!&ndash;-->
+<!--                Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.-->
+
+<!--                Highlighted: "bg-gray-100", Not Highlighted: "bg-white"-->
+<!--              &ndash;&gt;-->
+<!--              <li class="bg-white cursor-default select-none relative py-2 px-3" id="listbox-option-0" role="option">-->
+<!--                <div class="flex items-center">-->
+<!--                  <span class="block font-medium truncate"> Unlabelled </span>-->
+<!--                </div>-->
+<!--              </li>-->
+
+<!--              &lt;!&ndash;-->
+<!--                Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.-->
+
+<!--                Highlighted: "bg-gray-100", Not Highlighted: "bg-white"-->
+<!--              &ndash;&gt;-->
+<!--              <li class="bg-white cursor-default select-none relative py-2 px-3" id="listbox-option-1" role="option">-->
+<!--                <div class="flex items-center">-->
+<!--                  <span class="block font-medium truncate"> Engineering </span>-->
+<!--                </div>-->
+<!--              </li>-->
+
+<!--              &lt;!&ndash; More items... &ndash;&gt;-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="flex-shrink-0">-->
+<!--          <label id="listbox-label" class="sr-only"> Add a due date </label>-->
+<!--          <div class="relative">-->
+<!--            <button type="button" class="relative inline-flex items-center rounded-full py-2 px-2 bg-gray-50 text-sm font-medium text-gray-500 whitespace-nowrap hover:bg-gray-100 sm:px-3" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">-->
+<!--              &lt;!&ndash;-->
+<!--                Heroicon name: solid/calendar-->
+
+<!--                Selected: "text-gray-300", Default: "text-gray-500"-->
+<!--              &ndash;&gt;-->
+<!--              <svg class="text-gray-300 flex-shrink-0 h-5 w-5 sm:-ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">-->
+<!--                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />-->
+<!--              </svg>-->
+<!--              &lt;!&ndash; Selected: "text-gray-900" &ndash;&gt;-->
+<!--              <span class="hidden truncate sm:ml-2 sm:block"> Due date </span>-->
+<!--            </button>-->
+
+<!--            &lt;!&ndash;-->
+<!--              Select popover, show/hide based on select state.-->
+
+<!--              Entering: ""-->
+<!--                From: ""-->
+<!--                To: ""-->
+<!--              Leaving: "transition ease-in duration-100"-->
+<!--                From: "opacity-100"-->
+<!--                To: "opacity-0"-->
+<!--            &ndash;&gt;-->
+<!--            <ul class="hidden absolute right-0 z-10 mt-1 w-52 bg-white shadow max-h-56 rounded-lg py-3 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-0">-->
+<!--              &lt;!&ndash;-->
+<!--                Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.-->
+
+<!--                Highlighted: "bg-gray-100", Not Highlighted: "bg-white"-->
+<!--              &ndash;&gt;-->
+<!--              <li class="bg-white cursor-default select-none relative py-2 px-3" id="listbox-option-0" role="option">-->
+<!--                <div class="flex items-center">-->
+<!--                  <span class="block font-medium truncate"> No due date </span>-->
+<!--                </div>-->
+<!--              </li>-->
+
+<!--              &lt;!&ndash;-->
+<!--                Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.-->
+
+<!--                Highlighted: "bg-gray-100", Not Highlighted: "bg-white"-->
+<!--              &ndash;&gt;-->
+<!--              <li class="bg-white cursor-default select-none relative py-2 px-3" id="listbox-option-1" role="option">-->
+<!--                <div class="flex items-center">-->
+<!--                  <span class="block font-medium truncate"> Today </span>-->
+<!--                </div>-->
+<!--              </li>-->
+
+<!--              &lt;!&ndash; More items... &ndash;&gt;-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="border-t border-gray-200 px-2 py-2 flex justify-between items-center space-x-3 sm:px-3">-->
+<!--        <div class="flex">-->
+<!--          <button type="button" class="-ml-2 -my-2 rounded-full px-3 py-2 inline-flex items-center text-left text-gray-400 group">-->
+<!--            <svg class="-ml-1 h-5 w-5 mr-2 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">-->
+<!--              <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />-->
+<!--            </svg>-->
+<!--            <span class="text-sm text-gray-500 group-hover:text-gray-600 italic">Attach a file</span>-->
+<!--          </button>-->
+<!--        </div>-->
+<!--        <div class="flex-shrink-0">-->
+<!--          <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Publish</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </form>-->
+
+<!--</div>-->
+
+
+<section class="pt-[180px] pb-[120px] overflow-hidden">
+  <div class="container">
+    <div class="flex flex-wrap mx-[-16px]">
+      <div class="w-full lg:w-8/12 px-4">
+        <div *ngIf="owner">
           <div class="relative">
-            <button type="button" class="relative inline-flex items-center rounded-full py-2 px-2 bg-gray-50 text-sm font-medium text-gray-500 whitespace-nowrap hover:bg-gray-100 sm:px-3" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">
-              <!--
-                Placeholder icon, show/hide based on listbox state.
-
-                Heroicon name: solid/user-circle
-              -->
-              <svg class="flex-shrink-0 h-5 w-5 text-gray-300 sm:-ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
-              </svg>
-
-              <!-- Selected user avatar, show/hide based on listbox state. -->
-              <img src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="flex-shrink-0 h-5 w-5 rounded-full">
-
-              <!-- Selected: "text-gray-900" -->
-              <span class="hidden truncate sm:ml-2 sm:block"> Assign </span>
-            </button>
-
-            <!--
-              Select popover, show/hide based on select state.
-
-              Entering: ""
-                From: ""
-                To: ""
-              Leaving: "transition ease-in duration-100"
-                From: "opacity-100"
-                To: "opacity-0"
-            -->
-            <ul class="hidden absolute right-0 z-10 mt-1 w-52 bg-white shadow max-h-56 rounded-lg py-3 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-0">
-              <!--
-                Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
-
-                Highlighted: "bg-gray-100", Not Highlighted: "bg-white"
-              -->
-              <li class="bg-white cursor-default select-none relative py-2 px-3" id="listbox-option-0" role="option">
-                <div class="flex items-center">
-                  <!-- Heroicon name: solid/user-circle -->
-                  <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
-                  </svg>
-                  <span class="ml-3 block font-medium truncate"> Unassigned </span>
-                </div>
-              </li>
-
-              <!--
-                Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
-
-                Highlighted: "bg-gray-100", Not Highlighted: "bg-white"
-              -->
-              <li class="bg-white cursor-default select-none relative py-2 px-3" id="listbox-option-1" role="option">
-                <div class="flex items-center">
-                  <img src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="flex-shrink-0 h-5 w-5 rounded-full">
-                  <span class="ml-3 block font-medium truncate"> Wade Cooper </span>
-                </div>
-              </li>
-
-              <!-- More items... -->
-            </ul>
-          </div>
-        </div>
-
-        <div class="flex-shrink-0">
-          <label id="listbox-label" class="sr-only"> Add a label </label>
-          <div class="relative">
-            <button type="button" class="relative inline-flex items-center rounded-full py-2 px-2 bg-gray-50 text-sm font-medium text-gray-500 whitespace-nowrap hover:bg-gray-100 sm:px-3" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">
-              <!--
-                Heroicon name: solid/tag
-
-                Selected: "text-gray-300", Default: "text-gray-500"
-              -->
-              <svg class="text-gray-300 flex-shrink-0 h-5 w-5 sm:-ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-              </svg>
-              <!-- Selected: "text-gray-900" -->
-              <span class="hidden truncate sm:ml-2 sm:block"> Label </span>
-            </button>
-
-            <!--
-              Select popover, show/hide based on select state.
-
-              Entering: ""
-                From: ""
-                To: ""
-              Leaving: "transition ease-in duration-100"
-                From: "opacity-100"
-                To: "opacity-0"
-            -->
-            <ul class="hidden absolute right-0 z-10 mt-1 w-52 bg-white shadow max-h-56 rounded-lg py-3 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-0">
-              <!--
-                Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
-
-                Highlighted: "bg-gray-100", Not Highlighted: "bg-white"
-              -->
-              <li class="bg-white cursor-default select-none relative py-2 px-3" id="listbox-option-0" role="option">
-                <div class="flex items-center">
-                  <span class="block font-medium truncate"> Unlabelled </span>
-                </div>
-              </li>
-
-              <!--
-                Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
-
-                Highlighted: "bg-gray-100", Not Highlighted: "bg-white"
-              -->
-              <li class="bg-white cursor-default select-none relative py-2 px-3" id="listbox-option-1" role="option">
-                <div class="flex items-center">
-                  <span class="block font-medium truncate"> Engineering </span>
-                </div>
-              </li>
-
-              <!-- More items... -->
-            </ul>
-          </div>
-        </div>
-
-        <div class="flex-shrink-0">
-          <label id="listbox-label" class="sr-only"> Add a due date </label>
-          <div class="relative">
-            <button type="button" class="relative inline-flex items-center rounded-full py-2 px-2 bg-gray-50 text-sm font-medium text-gray-500 whitespace-nowrap hover:bg-gray-100 sm:px-3" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">
-              <!--
-                Heroicon name: solid/calendar
-
-                Selected: "text-gray-300", Default: "text-gray-500"
-              -->
-              <svg class="text-gray-300 flex-shrink-0 h-5 w-5 sm:-ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
-              </svg>
-              <!-- Selected: "text-gray-900" -->
-              <span class="hidden truncate sm:ml-2 sm:block"> Due date </span>
-            </button>
-
-            <!--
-              Select popover, show/hide based on select state.
-
-              Entering: ""
-                From: ""
-                To: ""
-              Leaving: "transition ease-in duration-100"
-                From: "opacity-100"
-                To: "opacity-0"
-            -->
-            <ul class="hidden absolute right-0 z-10 mt-1 w-52 bg-white shadow max-h-56 rounded-lg py-3 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-0">
-              <!--
-                Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
-
-                Highlighted: "bg-gray-100", Not Highlighted: "bg-white"
-              -->
-              <li class="bg-white cursor-default select-none relative py-2 px-3" id="listbox-option-0" role="option">
-                <div class="flex items-center">
-                  <span class="block font-medium truncate"> No due date </span>
-                </div>
-              </li>
-
-              <!--
-                Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
-
-                Highlighted: "bg-gray-100", Not Highlighted: "bg-white"
-              -->
-              <li class="bg-white cursor-default select-none relative py-2 px-3" id="listbox-option-1" role="option">
-                <div class="flex items-center">
-                  <span class="block font-medium truncate"> Today </span>
-                </div>
-              </li>
-
-              <!-- More items... -->
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="border-t border-gray-200 px-2 py-2 flex justify-between items-center space-x-3 sm:px-3">
-        <div class="flex">
-          <button type="button" class="-ml-2 -my-2 rounded-full px-3 py-2 inline-flex items-center text-left text-gray-400 group">
-            <svg class="-ml-1 h-5 w-5 mr-2 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
+            <img *ngIf="course?.image"
+                 class="h-32 w-full object-cover lg:h-48"
+                 [src]="course?.image"
+                 alt="">
+            <img *ngIf="!course?.image"
+                 class="h-32 w-full object-cover lg:h-48"
+                 src="assets/no-image-course.jpg"
+                 alt="">
+            <div *ngIf="loginedUser?.email === owner.user?.email" class="absolute bottom-3 right-5 z-10">
+              <label for="cover"
+                     class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[4px] border border-white border-opacity-35 bg-white bg-opacity-30 text-white hover:bg-opacity-20">
+                <input type="file" name="cover" id="cover" class="hidden">
+                <span>
+            <svg width="16" height="16" viewBox="0 0 16 16" class="fill-white">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M5.4453 1.63085C5.56894 1.44539 5.7771 1.33398 6 1.33398H10C10.2229 1.33398 10.4311 1.44539 10.5547 1.63085L11.6901 3.33398H14C14.5304 3.33398 15.0391 3.5447 15.4142 3.91977C15.7893 4.29484 16 4.80355 16 5.33398V12.6673C16 13.1978 15.7893 13.7065 15.4142 14.0815C15.0391 14.4566 14.5304 14.6673 14 14.6673H2C1.46957 14.6673 0.960859 14.4566 0.585786 14.0815C0.210714 13.7065 0 13.1978 0 12.6673V5.33398C0 4.80355 0.210714 4.29484 0.585786 3.91977C0.960859 3.5447 1.46957 3.33398 2 3.33398H4.30988L5.4453 1.63085ZM6.35679 2.66732L5.22137 4.37045C5.09772 4.55592 4.88957 4.66732 4.66667 4.66732H2C1.82319 4.66732 1.65362 4.73756 1.5286 4.86258C1.40357 4.9876 1.33333 5.15717 1.33333 5.33398V12.6673C1.33333 12.8441 1.40357 13.0137 1.5286 13.1387C1.65362 13.2637 1.82319 13.334 2 13.334H14C14.1768 13.334 14.3464 13.2637 14.4714 13.1387C14.5964 13.0137 14.6667 12.8441 14.6667 12.6673V5.33398C14.6667 5.15717 14.5964 4.9876 14.4714 4.86258C14.3464 4.73756 14.1768 4.66732 14 4.66732H11.3333C11.1104 4.66732 10.9023 4.55592 10.7786 4.37045L9.64321 2.66732H6.35679Z"></path>
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M7.99984 6.66732C6.89527 6.66732 5.99984 7.56275 5.99984 8.66732C5.99984 9.77189 6.89527 10.6673 7.99984 10.6673C9.10441 10.6673 9.99984 9.77189 9.99984 8.66732C9.99984 7.56275 9.10441 6.66732 7.99984 6.66732ZM4.6665 8.66732C4.6665 6.82637 6.15889 5.33398 7.99984 5.33398C9.84079 5.33398 11.3332 6.82637 11.3332 8.66732C11.3332 10.5083 9.84079 12.0007 7.99984 12.0007C6.15889 12.0007 4.6665 10.5083 4.6665 8.66732Z"></path>
             </svg>
-            <span class="text-sm text-gray-500 group-hover:text-gray-600 italic">Attach a file</span>
-          </button>
+          </span>
+              </label>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center justify-between pb-4 mt-10 mb-10 border-b border-[#959cb1] border-opacity-10 dark:border-white dark:border-opacity-10">
+            <div class="flex flex-wrap items-center">
+              <div class="flex items-center mr-10 mb-5">
+                <div class="w-full flex space-x-10">
+                  <h3 class="font-bold text-black dark:text-white font-xl sm:text-2xl lg:text-xl xl:text-2xl leading-tight sm:leading-tight lg:leading-tight xl:leading-tight">
+                    {{course?.name}}
+                  </h3>
+                  <span *ngIf="course?.section" class="bg-[#4a6cf7] rounded-full inline-flex items-center justify-center py-2 px-4 font-semibold text-sm text-white"> {{course?.section}} </span>
+                </div>
+              </div>
+            </div>
+            <div class="mb-5 flex space-x-4">
+              <button type="button" *ngIf="loginedUser && !isInCourse" (click)="joinCourse()"
+                      class="block text-base font-bold text-white bg-green-600 py-3 px-8 md:px-9 lg:px-6 xl:px-9 hover:shadow-signUp hover:bg-opacity-90 rounded-md transition ease-in-up duration-300">
+                Join
+              </button>
+              <button type="button" *ngIf="loginedUser && isInCourse && !(loginedUser?.email === owner.user.email)" (click)="leaveCourse()"
+                      class="block text-base font-bold text-white bg-red-600 py-3 px-8 md:px-9 lg:px-6 xl:px-9 hover:shadow-signUp hover:bg-opacity-90 rounded-md transition ease-in-up duration-300">
+                Leave
+              </button>
+              <button type="button" *ngIf="loginedUser?.email === owner.user.email"
+                      class="block text-base font-bold text-white bg-yellow-500 py-3 px-8 md:px-9 lg:px-6 xl:px-9 hover:shadow-signUp hover:bg-opacity-90 rounded-md transition ease-in-up duration-300">
+                Edit
+              </button>
+            </div>
+          </div>
+          <div>
+            <div *ngIf="course?.description" class="rounded-md overflow-hidden p-8 md:p-9 lg:p-8 xl:p-9 bg-[#4a6cf7] bg-opacity-10 relative z-10 mb-10">
+              <p class="text-center text-base text-[#959cb1] italic font-medium">
+                {{course?.description}}
+              </p>
+              <span class="absolute left-0 top-0 z-[-1]">
+<svg width="132" height="109" viewBox="0 0 132 109" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path opacity="0.5" d="M33.0354 90.11C19.9851 102.723 -3.75916 101.834 -14 99.8125V-15H132C131.456 -12.4396 127.759 -2.95278 117.318 14.5117C104.268 36.3422 78.7114 31.8952 63.2141 41.1934C47.7169 50.4916 49.3482 74.3435 33.0354 90.11Z" fill="url(#paint0_linear_111:606)"></path>
+<path opacity="0.5" d="M33.3654 85.0768C24.1476 98.7862 1.19876 106.079 -9.12343 108.011L-38.876 22.9988L100.816 -25.8905C100.959 -23.8126 99.8798 -15.5499 94.4164 0.87754C87.5871 21.4119 61.9822 26.677 49.5641 38.7512C37.146 50.8253 44.8877 67.9401 33.3654 85.0768Z" fill="url(#paint1_linear_111:606)"></path>
+<defs>
+<linearGradient id="paint0_linear_111:606" x1="94.7523" y1="82.0246" x2="8.40951" y2="52.0609" gradientUnits="userSpaceOnUse">
+<stop stop-color="white" stop-opacity="0.06"></stop>
+<stop offset="1" stop-color="white" stop-opacity="0"></stop>
+</linearGradient>
+<linearGradient id="paint1_linear_111:606" x1="90.3206" y1="58.4236" x2="1.16149" y2="50.8365" gradientUnits="userSpaceOnUse">
+<stop stop-color="white" stop-opacity="0.06"></stop>
+<stop offset="1" stop-color="white" stop-opacity="0"></stop>
+</linearGradient>
+</defs>
+</svg>
+</span>
+              <span class="absolute right-0 bottom-0 z-[-1]">
+<svg width="53" height="30" viewBox="0 0 53 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle opacity="0.8" cx="37.5" cy="37.5" r="37.5" fill="#4A6CF7"></circle>
+<mask id="mask0_111:596" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="75" height="75">
+<circle opacity="0.8" cx="37.5" cy="37.5" r="37.5" fill="#4A6CF7"></circle>
+</mask>
+<g mask="url(#mask0_111:596)">
+<circle opacity="0.8" cx="37.5" cy="37.5" r="37.5" fill="url(#paint0_radial_111:596)"></circle>
+<g opacity="0.8" filter="url(#filter0_f_111:596)">
+<circle cx="40.8089" cy="19.853" r="15.4412" fill="white"></circle>
+</g>
+</g>
+<defs>
+<filter id="filter0_f_111:596" x="4.36768" y="-16.5881" width="72.8823" height="72.8823" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+<feGaussianBlur stdDeviation="10.5" result="effect1_foregroundBlur_111:596"></feGaussianBlur>
+ </filter>
+<radialGradient id="paint0_radial_111:596" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(37.5 37.5) rotate(90) scale(40.2574)">
+<stop stop-opacity="0.47"></stop>
+<stop offset="1" stop-opacity="0"></stop>
+</radialGradient>
+</defs>
+</svg>
+</span>
+            </div>
+          </div>
         </div>
-        <div class="flex-shrink-0">
-          <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Publish</button>
+      </div>
+      <div class="w-full lg:w-4/12 px-4">
+        <div class="bg-[#4a6cf7] bg-opacity-5 dark:bg-opacity-5 rounded-md mt-12 lg:mt-0 mb-10 p-6">
+          <form class="flex items-center justify-between">
+            <input type="text" placeholder="Search here..." class="w-full dark:bg-white dark:bg-opacity-10 rounded-md border border-transparent py-3 px-5 text-[#959cb1] palceholder-[#959cb1] font-medium text-base mr-5 outline-none focus:border-[#4a6cf7]">
+            <button class="max-w-[50px] w-full h-[50px] flex items-center justify-center rounded-md bg-[#4a6cf7] text-white">
+              <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.4062 16.8125L13.9375 12.375C14.9375 11.0625 15.5 9.46875 15.5 7.78125C15.5 5.75 14.7188 3.875 13.2812 2.4375C10.3438 -0.5 5.5625 -0.5 2.59375 2.4375C1.1875 3.84375 0.40625 5.75 0.40625 7.75C0.40625 9.78125 1.1875 11.6562 2.625 13.0937C4.09375 14.5625 6.03125 15.3125 7.96875 15.3125C9.875 15.3125 11.75 14.5938 13.2188 13.1875L18.75 17.6562C18.8438 17.75 18.9688 17.7812 19.0938 17.7812C19.25 17.7812 19.4062 17.7188 19.5312 17.5938C19.6875 17.3438 19.6562 17 19.4062 16.8125ZM3.375 12.3438C2.15625 11.125 1.5 9.5 1.5 7.75C1.5 6 2.15625 4.40625 3.40625 3.1875C4.65625 1.9375 6.3125 1.3125 7.96875 1.3125C9.625 1.3125 11.2812 1.9375 12.5312 3.1875C13.75 4.40625 14.4375 6.03125 14.4375 7.75C14.4375 9.46875 13.7188 11.125 12.5 12.3438C10 14.8438 5.90625 14.8438 3.375 12.3438Z" fill="white"></path>
+              </svg>
+            </button>
+          </form>
+        </div>
+        <div class="bg-[#4a6cf7] max-h-[660px] bg-opacity-5 dark:bg-opacity-10 rounded-md mb-10">
+          <h3 class="font-semibold text-black dark:text-white text-lg py-4 px-8 border-b border-[#959cb1] border-opacity-10 dark:border-white dark:border-opacity-10">
+            Joined Users
+          </h3>
+          <div *ngIf="!isInCourse && loginedUser" class="py-16">
+            <div class="flex flex-col justify-center items-center">
+              <h3 class="font-bold text-black dark:text-white text-xl leading-tight">To see joined users, join to course</h3>
+              <button type="button" (click)="joinCourse()"
+                      class="mt-5 text-base font-bold text-white bg-green-600 py-3 px-8 md:px-9 lg:px-6 xl:px-9 hover:shadow-signUp hover:bg-opacity-90 rounded-md transition ease-in-up duration-300">
+                Join course
+              </button>
+            </div>
+          </div>
+          <div *ngIf="!isInCourse && !loginedUser" class="py-16">
+            <div class="flex flex-col justify-center items-center">
+              <h3 class="font-bold text-black dark:text-white text-xl leading-tight">Sign in or Sign up to your account</h3>
+              <div class="flex space-x-2 mt-5">
+                <a [routerLink]="['/auth','login']"
+                   class="block text-base font-bold text-dark dark:text-white hover:opacity-70 py-3 px-7">
+                  Sign in
+                </a>
+                <a [routerLink]="['/auth','register']"
+                   class="block text-base font-bold text-white bg-[#4a6cf7] py-3 px-8 md:px-9 lg:px-6 xl:px-9 hover:shadow-signUp hover:bg-opacity-90 rounded-md transition ease-in-up duration-300">
+                  Sign up
+                </a>
+              </div>
+            </div>
+          </div>
+          <ul *ngIf="isInCourse" class="p-8 max-h-[600px] overflow-y-scroll">
+            <li *ngIf="owner" class="mb-6 dark:border-white">
+              <div class="flex lg:block xl:flex items-center">
+                <div class="max-w-[75px] w-full h-[75px] rounded-full overflow-hidden mr-5 lg:mb-3 xl:mb-0">
+                  <img *ngIf="owner.user.image" [src]="owner.user.image" class="w-full">
+                  <span *ngIf="!owner.user.image"
+                        class="inline-flex items-center justify-center h-full w-full rounded-full bg-gray-500">
+                    <span class="text-3xl font-medium leading-none text-white">{{owner.user.firstName | slice:0:1}}</span>
+                  </span>
+                </div>
+                <div class="w-full">
+                  <h5>
+                    <a [routerLink]="['/profile', owner.user.slug]" class="font-medium text-black dark:text-white text-base leading-snug block mb-[6px] hover:text-[#4a6cf7] dark:hover:text-[#4a6cf7]">
+                      {{owner.user.firstName}} {{owner.user.lastName}}
+                    </a>
+                  </h5>
+                  <p class="text-xs font-medium text-[#959cb1]">{{owner.role.name}}</p>
+                </div>
+              </div>
+            </li>
+            <li *ngFor="let user of course?.users"
+                [ngClass]="{'hidden':user.user.email===owner.user.email}"
+                class="pb-6 border-t pt-6 border-[#959cb1] border-opacity-10 dark:border-white dark:border-opacity-10">
+              <div class="flex lg:block xl:flex items-center">
+                <div class="max-w-[75px] w-full h-[75px] rounded-full overflow-hidden mr-5 lg:mb-3 xl:mb-0">
+                  <img *ngIf="user.user.image" [src]="user.user.image" class="w-full">
+                  <span *ngIf="!user.user.image"
+                        class="inline-flex items-center justify-center h-full w-full rounded-full bg-gray-500">
+                    <span class="text-3xl font-medium leading-none text-white">{{user.user.firstName | slice:0:1}}</span>
+                  </span>
+                </div>
+                <div class="w-full">
+                  <h5>
+                    <a [routerLink]="['/profile', user.user.slug]" class="font-medium text-black dark:text-white text-base leading-snug block mb-[6px] hover:text-[#4a6cf7] dark:hover:text-[#4a6cf7]">
+                      {{user.user.firstName}} {{user.user.lastName}}
+                    </a>
+                  </h5>
+                  <p class="text-xs font-medium text-[#959cb1]">{{user.role.name}}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-  </form>
-
-</div>
+  </div>
+</section>

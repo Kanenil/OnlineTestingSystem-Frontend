@@ -38,30 +38,34 @@ export class CourseComponent {
     })
     this.route.paramMap.subscribe(params => {
       const slug = params.get('slug');
-      if (slug) {
-        this.isLoading = true;
-        this.courseService.getBySlug(slug).subscribe(course => {
-          this.course = course;
-          this.isLoading = false;
-          this.owner = this.course.users.filter(value => value.role.name === "Owner")[0];
-
-          if (localStorage.getItem(LocalStorageKeys.Tokens)) {
-            this.accountService.profile().subscribe(user => {
-              this.loginedUser = user;
-              if (user && user.courses.length > 0) {
-                this.isInCourse = !!user.courses.find(value => value.course.id == course.id);
-              } else {
-                this.isInCourse = false;
-              }
-            })
-          }
-          titleService.setTitle(`Smart Test - ${this.course.name}`)
-        },error => {
-          if(error.status === 404)
-            this.router.navigate(['/not-found']);
-        })
-      }
+      this.loadCourse(slug);
     })
+  }
+
+  private loadCourse(slug: string | null) {
+    if (slug) {
+      this.isLoading = true;
+      this.courseService.getBySlug(slug).subscribe(course => {
+        this.course = course;
+        this.isLoading = false;
+        this.owner = this.course.users.filter(value => value.role.name === "Owner")[0];
+
+        if (localStorage.getItem(LocalStorageKeys.Tokens)) {
+          this.accountService.profile().subscribe(user => {
+            this.loginedUser = user;
+            if (user && user.courses.length > 0) {
+              this.isInCourse = !!user.courses.find(value => value.course.id == course.id);
+            } else {
+              this.isInCourse = false;
+            }
+          })
+        }
+        this.titleService.setTitle(`${this.course.name} - Smart Test`)
+      },error => {
+        if(error.status === 404)
+          this.router.navigate(['/not-found']);
+      })
+    }
   }
 
   private loadUser() {
@@ -80,6 +84,7 @@ export class CourseComponent {
       this.courseService.join(this.course.id).subscribe(() => {
         this.isInCourse = true;
         this.loadUser();
+        this.loadCourse(this.course?.slug||'');
         this.notifyService.showSuccess("You successfully joined to course","Course info");
       })
     }

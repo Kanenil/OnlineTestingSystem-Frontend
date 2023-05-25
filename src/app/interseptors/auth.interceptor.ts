@@ -23,7 +23,10 @@ export class AuthInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const req = this.addHeaders(request);
+    let req = request;
+
+    if(request.url !== 'https://accounts.google.com/o/oauth2/v2/auth')
+      req = this.addHeaders(request)
 
     return next.handle(req)
       .pipe(

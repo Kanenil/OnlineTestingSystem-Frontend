@@ -7,14 +7,12 @@ import {RegisterComponent} from "./auth/register/register.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {RouterLink} from "@angular/router";
 import { GoogleFinishComponent } from './auth/google-finish/google-finish.component';
-import {GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig} from "@abacritt/angularx-social-login";
-import {environment} from "../../environments/environment";
 import {CourseModule} from "../components/course/course.module";
 import { UserComponent } from './profile/user/user.component';
 import { CoursesComponent } from './courses/courses/courses.component';
 import { CourseComponent } from './courses/course/course.component';
-
-
+import { SettingsComponent } from './profile/settings/settings.component';
+import {GoogleSigninModule} from "../components/google-signin/google-signin.module";
 
 @NgModule({
   declarations: [
@@ -25,14 +23,15 @@ import { CourseComponent } from './courses/course/course.component';
     GoogleFinishComponent,
     UserComponent,
     CoursesComponent,
-    CourseComponent
+    CourseComponent,
+    SettingsComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterLink,
-    GoogleSigninButtonModule,
-    CourseModule
+    CourseModule,
+    GoogleSigninModule,
   ],
   exports: [
     NotFoundComponent,
@@ -40,28 +39,7 @@ import { CourseComponent } from './courses/course/course.component';
     LoginComponent,
     RegisterComponent,
     GoogleFinishComponent,
-    UserComponent
+    UserComponent,
   ],
-  providers: [
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              environment.googleClientId,{
-                oneTapEnabled: false,
-              }
-            )
-          }
-        ],
-        onError: (err) => {
-          console.error(err);
-        }
-      } as SocialAuthServiceConfig,
-    }
-  ]
 })
 export class PagesModule { }

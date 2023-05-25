@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ModalComponent } from './modal.component';
 import { CreateCourseComponent } from './create-course/create-course.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import {GoogleSigninModule} from "../google-signin/google-signin.module";
 
 
 
@@ -14,9 +15,10 @@ import {ReactiveFormsModule} from "@angular/forms";
   exports: [
     ModalComponent
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        GoogleSigninModule
+    ]
 })
 export class ModalModule { }

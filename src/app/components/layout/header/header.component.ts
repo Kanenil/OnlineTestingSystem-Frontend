@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {IExtendedUserModel} from "../../../models/user/extended-user.model";
 import {ThemeService} from "../../../services/theme.service";
 import {EventBusService} from "../../../shared/event-bus.service";
@@ -29,6 +29,16 @@ export class HeaderComponent implements OnInit {
     this.eventBusService.on(EventNameKeys.Authorize, (tokens:any) => {
       this.loadUser();
     });
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (document.body.scrollTop > 70 ||
+      document.documentElement.scrollTop > 70) {
+      document.querySelector('header')?.classList.add('sticky');
+    } else {
+      document.querySelector('header')?.classList.remove('sticky');
+    }
   }
 
   private loadUser() {

@@ -1,88 +1,33 @@
-<nav class="bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between h-16">
-      <div class="flex">
-        <div class="flex-shrink-0 flex items-center">
-          <a routerLink="/">
-            <img class="block lg:hidden h-8 w-auto" src="/assets/small-logo.svg"
-                 alt="Workflow">
-            <img *ngIf="!(themeService.isDarkTheme$ | async)" class="hidden lg:block h-10 w-auto"
-                 src="/assets/logo.svg" alt="Workflow">
-            <img *ngIf="themeService.isDarkTheme$ | async" class="hidden lg:block h-10 w-auto"
-                 src="/assets/dark-logo.svg" alt="Workflow">
-          </a>
-        </div>
-        <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
-
-          <a routerLink="/courses"
-             routerLinkActive="border-primary-300 hover:border-primary-200 text-gray-900 dark:text-white dark:border-primary-500 dark:hover:border-primary-400"
-             class="transition animate-opacity border-transparent text-gray-500 dark:text-gray-300 hover:border-primary-500 dark:hover:border-primary-400 hover:text-gray-700 dark:hover:text-gray-200 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-            Courses
-          </a>
-
-        </div>
+<header class="header bg-transparent absolute top-0 left-0 z-40 w-full flex items-center">
+  <div class="container">
+    <div class="flex mx-[-16px] items-center justify-between relative">
+      <div class="px-4 w-60 max-w-full">
+        <a routerLink="/" class="w-full block py-8 header-logo">
+          <img src="assets/logo.svg" alt="logo" class="w-full dark:hidden">
+          <img src="assets/dark-logo.svg" alt="logo" class="w-full hidden dark:block">
+        </a>
       </div>
-      <div class="hidden sm:ml-6 sm:flex sm:items-center">
-
-        <div class="mr-2">
-          <header-theme-switcher></header-theme-switcher>
+      <div class="flex px-4 justify-between items-center w-full">
+        <div>
+          <header-nav-menu [loginedUser]="loginedUser"></header-nav-menu>
         </div>
-
-        <div *ngIf="!loginedUser" class="items-center justify-end">
-          <a
-            routerLink="/auth/login"
-            class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
-            Sign
-            in </a>
-          <a routerLink="/auth/register"
-             class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary-500 hover:bg-primary-600 active:bg-primary-700">
-            Sign up </a>
-        </div>
-
-        <header-bell [loginedUser]="loginedUser"></header-bell>
-
-        <div *ngIf="loginedUser" class="ml-3 relative">
+        <div class="flex justify-end items-center pr-16 lg:pr-0">
+          <a *ngIf="!loginedUser" [routerLink]="['/auth','login']"
+             class="hidden md:block text-base font-bold text-dark dark:text-white hover:opacity-70 py-3 px-7">
+            Sign In
+          </a>
+          <a *ngIf="!loginedUser" [routerLink]="['/auth','register']"
+             class="hidden md:block text-base font-bold text-white bg-[#4a6cf7] py-3 px-8 md:px-9 lg:px-6 xl:px-9 hover:shadow-signUp hover:bg-opacity-90 rounded-md transition ease-in-up duration-300">
+            Sign Up
+          </a>
           <div>
-            <button (click)="profileMenu.togglePopup()" type="button"
-                    class="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:bg-gray-700"
-                    id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-              <img *ngIf="loginedUser.image" class="h-8 w-8 rounded-full" src="{{loginedUser.image}}" alt="">
-              <div *ngIf="!loginedUser.image"
-                   class="h-8 w-8 rounded-full bg-blue-600 flex justify-center items-center">
-                <span class="font-bold text-white">{{loginedUser.firstName.substring(0, 1) | uppercase}}</span>
-              </div>
-            </button>
+            <header-theme-switcher></header-theme-switcher>
           </div>
-          <header-profile-menu
-            [loginedUser]="loginedUser"
-            (logout)="logout()"
-            #profileMenu>
+          <header-profile-menu [loginedUser]="loginedUser"
+                               (logout)="logout()">
           </header-profile-menu>
         </div>
       </div>
-      <div class="-mr-2 flex items-center sm:hidden">
-        <header-theme-switcher class="mr-2"></header-theme-switcher>
-        <button type="button"
-                (click)="mobileMenu.togglePopup()"
-                class="bg-white inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-300 hover:dark:text-white"
-                aria-controls="mobile-menu" aria-expanded="false">
-
-          <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-               stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-
-          <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-               stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-          </svg>
-        </button>
-      </div>
     </div>
   </div>
-
-  <header-mobile-menu [loginedUser]="loginedUser"
-                      (logout)="logout()"
-                      #mobileMenu>
-  </header-mobile-menu>
-</nav>
+</header>

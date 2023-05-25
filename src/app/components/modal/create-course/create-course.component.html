@@ -1,98 +1,105 @@
-<div class="absolute z-50 top-16 left-1/2 -translate-x-1/2 flex bg-white dark:bg-gray-700 rounded-lg shadow-lg overflow-hidden mx-auto lg:w-1/4">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full space-y-6 p-8">
-    <div class="space-y-1 mb-4">
-      <label for="name"
-             class="block mb-2 text-sm font-medium"
-             [ngClass]="{
-                       'label-invalid': submitted && f['name'].errors,
-                       'label-valid': submitted &&  !f['name'].errors,
-                       'text-gray-900 dark:text-white': !submitted
+<section class="fixed z-50 top-16 left-1/2 -translate-x-1/2 overflow-hidden pb-[120px]">
+  <div class="container">
+    <div class="flex flex-wrap mx-[-16px]">
+      <div class="w-full px-4">
+        <div class="min-w-[500px] max-w-[700px] mx-auto bg-[#4a6cf7] bg-opacity-5 dark:bg-[#1d2144] rounded-md p-12 sm:p-[60px]">
+          <h3 class="font-bold text-[#1d2144] dark:text-white text-2xl sm:text-3xl mb-3 text-center">Create your course</h3>
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="mb-8">
+              <label class="block text-sm font-medium mb-3"
+                     [ngClass]="{
+                      'label-invalid': submitted && f['name'].errors,
+                      'label-valid': submitted &&  !f['name'].errors,
+                      'text-[#1d2144] dark:text-white': !submitted
                      }"
-      >
-        Course Name
-      </label>
-      <div class="relative mb-6">
-        <input type="text" id="name"
-               formControlName="name"
-               class="border text-sm rounded-lg block w-full p-2.5"
-               [ngClass]="{
-                        'input-invalid': submitted && f['name'].errors,
-                        'input-valid': submitted &&  !f['name'].errors,
-                        'bg-gray-50 border-gray-300 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500': !submitted
-                       }"
-        >
-      </div>
-      <p *ngIf="submitted && f['name'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
-        <span *ngIf="f['name'].errors?.['required']">Course Name is required</span>
-      </p>
-    </div>
-
-    <div class="space-y-1 mb-4">
-      <label for="section"
-             class="block mb-2 text-sm font-medium"
-             [ngClass]="{
-                       'label-invalid': submitted && f['section'].errors,
-                       'label-valid': submitted &&  !f['section'].errors,
-                       'text-gray-900 dark:text-white': !submitted
+                     for="name">
+                Course Name
+              </label>
+              <input type="text" id="name"
+                     formControlName="name"
+                     placeholder="Enter Course Name"
+                     class="w-full dark:bg-[#242B51] border border-transparent rounded-md shadow-one py-3 px-6 text-base outline-none focus-visible:shadow-none"
+                     [ngClass]="{
+                                'input-invalid': submitted && f['name'].errors,
+                                'input-valid': submitted &&  !f['name'].errors,
+                                'text-[#959cb1] placeholder-[#959cb1] focus:border-[#4a6cf7]': !submitted
+                                }">
+              <p *ngIf="submitted && f['name'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
+                <span *ngIf="f['name'].errors?.['required']">Course Name is required</span>
+              </p>
+            </div>
+            <div class="mb-8">
+              <label class="block text-sm font-medium mb-3"
+                     [ngClass]="{
+                      'label-invalid': submitted && f['section'].errors,
+                      'label-valid': submitted &&  !f['section'].errors,
+                      'text-[#1d2144] dark:text-white': !submitted
                      }"
-      >
-        Section
-      </label>
-      <div class="relative mb-6">
-        <input type="text" id="section"
-               formControlName="section"
-               class="border text-sm rounded-lg block w-full p-2.5"
-               [ngClass]="{
-                        'input-invalid': submitted && f['section'].errors,
-                        'input-valid': submitted &&  !f['section'].errors,
-                        'bg-gray-50 border-gray-300 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500': !submitted
-                       }"
-        >
-      </div>
-    </div>
-
-    <div class="space-y-1 mb-4">
-      <label for="description"
-             class="block mb-2 text-sm font-medium"
-             [ngClass]="{
-                       'label-invalid': submitted && f['description'].errors,
-                       'label-valid': submitted &&  !f['description'].errors,
-                       'text-gray-900 dark:text-white': !submitted
+                     for="section">
+                Section
+              </label>
+              <input type="text" id="section"
+                     formControlName="section"
+                     placeholder="Enter Section"
+                     class="w-full dark:bg-[#242B51] border border-transparent rounded-md shadow-one py-3 px-6 text-base outline-none focus-visible:shadow-none"
+                     [ngClass]="{
+                                'input-invalid': submitted && f['section'].errors,
+                                'input-valid': submitted &&  !f['section'].errors,
+                                'text-[#959cb1] placeholder-[#959cb1] focus:border-[#4a6cf7]': !submitted
+                                }">
+            </div>
+            <div class="mb-8">
+              <label class="block text-sm font-medium mb-3"
+                     [ngClass]="{
+                      'label-invalid': submitted && f['description'].errors,
+                      'label-valid': submitted &&  !f['description'].errors,
+                      'text-[#1d2144] dark:text-white': !submitted
                      }"
-      >
-        Description
-      </label>
-      <div class="relative mb-6">
-        <textarea id="description"
-                  formControlName="description"
-                  rows="4"
-                  class="block p-2.5 w-full text-sm rounded-lg border"
-                  [ngClass]="{
-                        'input-invalid': submitted && f['description'].errors,
-                        'input-valid': submitted &&  !f['description'].errors,
-                        'text-gray-900 bg-gray-50 border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500': !submitted
-                       }">
-        </textarea>
+                     for="description">
+                Description
+              </label>
+              <textarea type="text" id="description"
+                     formControlName="description"
+                     placeholder="Enter Description"
+                        rows="7"
+                     class="w-full dark:bg-[#242B51] border border-transparent rounded-md shadow-one py-3 px-6 text-base outline-none focus-visible:shadow-none"
+                     [ngClass]="{
+                                'input-invalid': submitted && f['description'].errors,
+                                'input-valid': submitted &&  !f['description'].errors,
+                                'text-[#959cb1] placeholder-[#959cb1] focus:border-[#4a6cf7]': !submitted
+                                }">
+              </textarea>
+            </div>
+            <div class="flex items-center justify-between mb-8">
+              <div>
+                <label class="flex items-center cursor-pointer text-[#959cb1] text-sm font-medium select-none"
+                       for="isOnlyForCodeAccess">
+                  <div class="relative">
+                    <input class="sr-only" id="isOnlyForCodeAccess" formControlName="isOnlyForCodeAccess" type="checkbox" #checkbox>
+                    <div
+                      class="box flex items-center justify-center w-5 h-5 rounded border border-[#959cb1] border-opacity-20 dark:border-white dark:border-opacity-10 mr-4">
+                      <span [ngClass]="{'opacity-0':!checkbox.checked}">
+                      <svg fill="none" height="8" viewBox="0 0 11 8" width="11" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M10.0915 0.951972L10.0867 0.946075L10.0813 0.940568C9.90076 0.753564 9.61034 0.753146 9.42927 0.939309L4.16201 6.22962L1.58507 3.63469C1.40401 3.44841 1.11351 3.44879 0.932892 3.63584C0.755703 3.81933 0.755703 4.10875 0.932892 4.29224L0.932878 4.29225L0.934851 4.29424L3.58046 6.95832C3.73676 7.11955 3.94983 7.2 4.1473 7.2C4.36196 7.2 4.55963 7.11773 4.71406 6.9584L10.0468 1.60234C10.2436 1.4199 10.2421 1.1339 10.0915 0.951972ZM4.2327 6.30081L4.2317 6.2998C4.23206 6.30015 4.23237 6.30049 4.23269 6.30082L4.2327 6.30081Z"
+                        fill="#3056D3" stroke="#3056D3" stroke-width="0.4"></path>
+                      </svg>
+                      </span>
+                    </div>
+                  </div>
+                  Make access to join only with code?
+                </label>
+              </div>
+            </div>
+            <div class="mb-6">
+              <button
+                class="w-full flex items-center justify-center text-base font-medium text-white bg-[#4a6cf7] py-4 px-9 hover:shadow-signUp hover:bg-opacity-80 transition duration-300 ease-in-out rounded-md">
+                Create
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-
-    <div class="flex items-center mb-4">
-      <input id="isOnlyForCodeAccess" formControlName="isOnlyForCodeAccess" type="checkbox" class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-      <label for="isOnlyForCodeAccess" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Make access to join only with code?</label>
-    </div>
-
-    <div>
-      <button type="submit"
-              class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-500 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-        Create
-      </button>
-    </div>
-  </form>
-
-  <button type="button" (click)="modalService.close()" class="absolute right-0 p-2 m-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-white dark:focus:ring-gray-400 h-10 text-gray-700 dark:text-gray-500 dark:hover:text-gray-200 hover:text-black">
-    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-         stroke="currentColor" aria-hidden="true">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-    </svg>
-  </button>
-</div>
+  </div>
+</section>

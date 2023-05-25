@@ -9,9 +9,16 @@ import {GoogleFinishComponent} from "./pages/auth/google-finish/google-finish.co
 import {UserComponent} from "./pages/profile/user/user.component";
 import {CoursesComponent} from "./pages/courses/courses/courses.component";
 import {CourseComponent} from "./pages/courses/course/course.component";
+import {SettingsComponent} from "./pages/profile/settings/settings.component";
+import {AuthGuard} from "./guards/auth.guard";
 
 const routes: Routes = [
-  {path: '', component: HomeComponent, data: {title: 'Home'}},
+  {
+    path: '',
+    component: HomeComponent,
+    canActivate: [IsSignedInGuard],
+    data: {title: 'Home'}
+  },
   {
     path:'auth',
     canActivate: [IsSignedInGuard],
@@ -47,7 +54,21 @@ const routes: Routes = [
       },
     ]
   },
-  {path: 'profile/:slug', component: UserComponent},
+  {
+    path:'profile',
+    children:[
+      {
+        path:'settings',
+        canActivate: [AuthGuard],
+        component: SettingsComponent,
+        data: {title: 'Settings'}},
+      {
+        path: ':slug',
+        component: UserComponent
+      },
+    ]
+  },
+
   {path: 'not-found', component: NotFoundComponent},
   {path: '**', redirectTo: 'not-found'}
 ];

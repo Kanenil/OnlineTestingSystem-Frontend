@@ -11,7 +11,7 @@ export class IsSignedInGuard {
   ) { }
   canActivate(): boolean {
     if (localStorage.getItem(LocalStorageKeys.Tokens)) {
-      this.router.navigate(['..'],{ replaceUrl: true });
+      this.router.navigate(['/courses'],{ replaceUrl: true });
       return false;
     }
     return true;

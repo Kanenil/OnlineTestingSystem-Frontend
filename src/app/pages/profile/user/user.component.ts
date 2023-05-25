@@ -55,7 +55,7 @@ export class UserComponent {
       this.usersService.getBySlug(slug).subscribe(user => {
         this.user = user;
         this.isLoading = false;
-        this.titleService.setTitle(`Smart Test - ${this.user.firstName} ${this.user.lastName}`)
+        this.titleService.setTitle(`${this.user.firstName} ${this.user.lastName} - Smart Test`)
       })
     } else {
       this.router.navigate(['/not-found']);

@@ -20,22 +20,26 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.router.events
-      .pipe(
-        filter((event) => event instanceof NavigationEnd),
-        map(() => {
-          const child: ActivatedRoute | null = this.route.firstChild;
-          let title = child && child.snapshot.data['title'];
-          if (title) {
-            return title;
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map(() => {
+        let child = this.route.firstChild;
+        while (child) {
+          if (child.firstChild) {
+            child = child.firstChild;
+          } else if (child.snapshot.data && child.snapshot.data['title']) {
+            return child.snapshot.data['title'];
+          } else {
+            return null;
           }
-        })
-      )
-      .subscribe((title) => {
-        if (title) {
-          this.titleService.setTitle(`Smart Test - ${title}`);
         }
-      });
+        return null;
+      })
+    ).subscribe( (data: any) => {
+      if (data) {
+        this.titleService.setTitle(data + ' - Smart Test');
+      }
+    });
   }
 
 }

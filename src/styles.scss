@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @import 'ngx-toastr/toastr';
 
 body {
@@ -14,19 +15,56 @@ body {
   opacity: 0.2 !important;
 }
 
+.container {
+  @apply mx-auto px-1
+}
+
+.dark .sticky {
+  @apply bg-[#4a6cf7] bg-opacity-20
+}
+
+.sticky .header-logo {
+  @media (min-width: 960px) {
+    @apply py-0.5
+  }
+}
+
+.navbarTogglerActive span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.navbarTogglerActive span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbarTogglerActive span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.sticky {
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  box-shadow: inset 0 -1px 0 0 rgba(0,0,0,.1);
+}
+
+body.modal-open {
+  height: 100vh;
+  overflow-y: hidden;
+}
+
 .label-invalid {
-  @apply text-red-700 dark:text-red-50
+  @apply text-red-700 dark:text-red-500
 }
 
 .label-valid {
-  @apply text-green-700 dark:text-green-50
+  @apply text-green-700 dark:text-green-500
 }
 
 .input-invalid {
-  @apply bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500
+  @apply border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500
 }
 
 .input-valid {
-  @apply bg-green-50 border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-green-500
+  @apply border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-green-500
 }
 

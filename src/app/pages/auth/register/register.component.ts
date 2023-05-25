@@ -7,6 +7,8 @@ import Validation from "../../../utils/validation";
 import {LocalStorageKeys} from "../../../constants/local-storage.constants";
 import {EventData} from "../../../shared/event.class";
 import {EventNameKeys} from "../../../constants/event-names.constants";
+import jwt_decode from "jwt-decode";
+import {IAuthResponseModel} from "../../../models/auth/auth-response.model";
 
 @Component({
   selector: 'app-register',
@@ -20,6 +22,7 @@ export class RegisterComponent implements OnInit {
     email: new FormControl(''),
     password: new FormControl(''),
     confirmPassword: new FormControl(''),
+    terms: new FormControl(false)
   });
   submitted = false;
 
@@ -29,6 +32,28 @@ export class RegisterComponent implements OnInit {
     private eventBusService: EventBusService,
     private router: Router
   ) { }
+
+  googleLogin(response: any) {
+    this.authService.googleLogin({googleToken: response.credential}).subscribe((resp) => {
+      this.saveAndRedirectToHome(resp);
+    }, error => {
+      if (error.error.ErrorMessage === 'GoogleLogin: User not found.') {
+        const decodedToken = jwt_decode<{
+          given_name: string,
+          family_name: string,
+          picture: string
+        }>(response.credential)
+        this.router.navigate(['/auth', 'google-finish'], {
+          queryParams: {
+            token: response.credential,
+            firstName: decodedToken.given_name || '',
+            lastName: decodedToken.family_name || '',
+            image: decodedToken.picture || '',
+          }
+        })
+      }
+    })
+  }
 
   ngOnInit() {
     this.form = this.formBuilder.group(
@@ -43,7 +68,8 @@ export class RegisterComponent implements OnInit {
             Validators.minLength(6),
           ]
         ],
-        confirmPassword: ['', Validators.required]
+        confirmPassword: ['', Validators.required],
+        terms: [false,Validators.requiredTrue]
       },
       {
         validators: [Validation.match('password', 'confirmPassword')]
@@ -64,9 +90,7 @@ export class RegisterComponent implements OnInit {
 
     this.authService.register(this.form.value).subscribe(
       resp => {
-        localStorage.setItem(LocalStorageKeys.Tokens, JSON.stringify(resp.tokens));
-        this.eventBusService.emit(new EventData(EventNameKeys.Authorize, resp.tokens));
-        this.router.navigate(['/'],{ replaceUrl: true });
+        this.saveAndRedirectToHome(resp);
       }, error => {
         if(error.error.ErrorMessage.includes('already exists')){
           this.f["email"].setErrors({'exists':true})
@@ -74,7 +98,11 @@ export class RegisterComponent implements OnInit {
       }
     );
 
-
   }
 
+  private saveAndRedirectToHome(resp: IAuthResponseModel) {
+    localStorage.setItem(LocalStorageKeys.Tokens, JSON.stringify(resp.tokens));
+    this.eventBusService.emit(new EventData(EventNameKeys.Authorize, resp.tokens));
+    this.router.navigate(['/courses'], {replaceUrl: true});
+  }
 }

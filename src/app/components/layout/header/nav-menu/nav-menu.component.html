@@ -1,0 +1,24 @@
+<button (click)="toggleMenu()"
+        id="navbarToggler"
+        class="block absolute right-4 top-1/2 translate-y-[-50%] lg:hidden focus:ring-2 ring-primary px-3 py-[6px] rounded-lg">
+  <span class="relative w-[30px] h-[2px] my-[6px] block bg-dark dark:bg-white"></span>
+  <span class="relative w-[30px] h-[2px] my-[6px] block bg-dark dark:bg-white"></span>
+  <span class="relative w-[30px] h-[2px] my-[6px] block bg-dark dark:bg-white"></span>
+</button>
+<nav id="navbarCollapse"
+     class="absolute py-5 lg:py-0 lg:px-4 xl:px-6 bg-white dark:bg-[#1d2144] lg:dark:bg-transparent lg:bg-transparent shadow-lg rounded-lg max-w-[250px] w-full lg:max-w-full lg:w-full right-4 top-full hidden lg:block lg:static lg:shadow-none">
+  <ul class="block lg:flex">
+    <li *ngIf="!loginedUser" class="relative group">
+      <a routerLink="/"
+         class="menu-scroll text-base text-dark dark:text-white group-hover:opacity-70 py-2 lg:py-6 lg:inline-flex lg:px-0 flex mx-8 lg:mr-0">
+        Home
+      </a>
+    </li>
+    <li class="relative group">
+      <a routerLink="/courses"
+         class="menu-scroll text-base text-dark dark:text-white group-hover:opacity-70 py-2 lg:py-6 lg:inline-flex lg:px-0 flex mx-8 lg:mr-0">
+        Courses
+      </a>
+    </li>
+  </ul>
+</nav>

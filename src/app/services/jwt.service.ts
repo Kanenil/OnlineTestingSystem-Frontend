@@ -9,14 +9,14 @@ export class JwtService {
 
   constructor() { }
 
-  getUserIdFromToken(token:string) {
+  decodeGoogle(token:string) {
     const decoded = this.decodeToken(token);
     return decoded?decoded.id:null;
   }
 
-  private decodeToken(token: string): ITokenUserModel | null {
+  private decodeToken(token: string): any {
     try {
-      return jwt_decode<ITokenUserModel>(token);
+      return jwt_decode<any>(token);
     } catch(Error) {
       return null;
     }
