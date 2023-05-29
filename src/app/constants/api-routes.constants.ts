@@ -6,7 +6,11 @@ export const ApiRouteKeys = {
   Base: base,
   Account: {
     profile: `${base}/account`,
+    edit: `${base}/account/edit`,
     logout: `${base}/account/logout`
+  },
+  Upload: {
+    upload: `${base}/Upload/upload`,
   },
   Auth: {
     login: `${base}/auth/login`,

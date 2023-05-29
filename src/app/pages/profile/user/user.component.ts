@@ -7,6 +7,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {EventBusService} from "../../../shared/event-bus.service";
 import {EventNameKeys} from "../../../constants/event-names.constants";
 import {LocalStorageKeys} from "../../../constants/local-storage.constants";
+import {ModalService} from "../../../services/modal.service";
+import {UploadService} from "../../../api/upload.service";
+import {IEditProfileModel} from "../../../models/account/edit-profile.model";
+import {convertBase64ToFile} from "../../../utils/converters";
 
 @Component({
   selector: 'app-user',
@@ -23,12 +27,14 @@ export class UserComponent {
     private router: Router,
     private usersService: UserService,
     public accountService: AccountService,
+    private modalService: ModalService,
     private titleService:Title,
-    private eventBusService: EventBusService
+    private eventBusService: EventBusService,
+    private uploadService: UploadService
   ) {
     this.route.paramMap.subscribe(params => {
       const slug = params.get('slug');
-      this.updateInforamtion(slug);
+      this.updateInformation(slug);
     });
     eventBusService.on(EventNameKeys.Authorize, ()=>{
       this.loadUser();
@@ -44,7 +50,43 @@ export class UserComponent {
       this.loginedUser = null;
   }
 
-  private updateInforamtion(slug: string | null) {
+  private editImage(key: string, image64:string) {
+    const file = convertBase64ToFile(image64, 'image.jpg');
+
+    let formData:FormData = new FormData();
+    formData.append('file', file)
+
+    this.uploadService.upload(formData).subscribe(resp=>{
+      const {fileUrl} = resp;
+      const editModel:IEditProfileModel = {
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        image: this.user.image,
+        backgroundImage: this.user.backgroundImage,
+      }
+      this.accountService.edit({
+        ...editModel,
+        [key]: fileUrl
+      }).subscribe(resp=>{
+        // @ts-ignore
+        this.user[key] = fileUrl;
+      })
+    })
+  }
+
+  changeBackgroundImage(image: any) {
+    if(this.user) {
+      this.editImage('backgroundImage', image);
+    }
+  }
+
+  changeLogo(image: any) {
+    if(this.user) {
+      this.editImage('image', image);
+    }
+  }
+
+  private updateInformation(slug: string | null) {
     this.loadUser();
 
     let ran = Math.round((Math.random() * 100) % 2) + 1;

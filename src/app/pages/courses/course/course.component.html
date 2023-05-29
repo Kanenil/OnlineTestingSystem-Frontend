@@ -1,269 +1,171 @@
-<!--<div *ngIf="course">-->
-<!--  <div class="relative">-->
-<!--    <img *ngIf="course.image"-->
-<!--         class="h-32 w-full object-cover lg:h-48"-->
-<!--         [src]="course.image"-->
-<!--         alt="">-->
-<!--    <img *ngIf="!course.image"-->
-<!--         class="h-32 w-full object-cover lg:h-48"-->
-<!--         src="assets/no-image-course.jpg"-->
-<!--         alt="">-->
+<section *ngIf="!isInCourse && course?.isOnlyForCodeAccess" class="relative z-10 pt-[180px] pb-[120px]">
+  <div class="container">
+    <div class="flex flex-wrap mx-[-16px]">
+      <div class="w-full px-4">
+        <div class="max-w-[530px] mx-auto text-center">
+          <div class="mx-auto mb-9 text-center">
+            <svg class="w-full mx-auto text-center" height="210" viewBox="0 0 474 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle opacity="0.8" cx="227.5" cy="81.5" r="68.5" fill="#4A6CF7"></circle>
+              <mask id="mask0_116:1137" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="159" y="13" width="137" height="137">
+                <circle opacity="0.8" cx="227.5" cy="81.5" r="68.5" fill="#4A6CF7"></circle>
+              </mask>
+              <g mask="url(#mask0_116:1137)">
+                <circle opacity="0.8" cx="227.5" cy="81.5" r="68.5" fill="url(#paint2_radial_116:1137)"></circle>
+                <g opacity="0.8" filter="url(#filter0_f_116:1137)">
+                  <circle cx="233.543" cy="49.2645" r="28.2059" fill="white"></circle>
+                </g>
+              </g>
+             <defs>
+                <filter id="filter0_f_116:1137" x="175.337" y="-8.94141" width="116.412" height="116.412" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                  <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                  <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+                  <feGaussianBlur stdDeviation="15" result="effect1_foregroundBlur_116:1137"></feGaussianBlur>
+                </filter>
+                <linearGradient id="paint0_linear_116:1137" x1="25" y1="183" x2="126.155" y2="27.0837" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#4A6CF7" stop-opacity="0"></stop>
+                  <stop offset="1" stop-color="#4A6CF7"></stop>
+                </linearGradient>
+                <linearGradient id="paint1_linear_116:1137" x1="307" y1="153" x2="408.155" y2="-2.91631" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#4A6CF7" stop-opacity="0"></stop>
+                  <stop offset="1" stop-color="#4A6CF7"></stop>
+                </linearGradient>
+                <radialGradient id="paint2_radial_116:1137" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(227.5 81.5) rotate(90) scale(73.5368)">
+                  <stop stop-opacity="0.47"></stop>
+                  <stop offset="1" stop-opacity="0"></stop>
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
+          <h3 class="font-bold text-black dark:text-white text-3xl sm:text-4xl mb-4">Sorry, this course is private</h3>
+          <p class="font-medium text-[#959cb1] text-base sm:text-lg leading-relaxed sm:leading-relaxed mb-10">
+            The course you were looking for appears to have private access.
+          </p>
+          <a [routerLink]="['/courses']" class="text-base font-bold text-white bg-[#4a6cf7] py-3 px-8 md:px-9 lg:px-8 xl:px-9 hover:bg-white hover:text-[#4a6cf7] shadow-signUp rounded-md">
+            Back to Courses
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hidden sm:block absolute left-0 bottom-0 z-[-1]">
+    <svg width="406" height="286" viewBox="0 0 406 286" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g opacity="0.5">
+        <rect opacity="0.5" x="56.25" y="110.344" width="116.719" height="116.438" stroke="url(#paint0_linear_116:1140)"></rect>
+        <rect opacity="0.1" x="56.25" y="110.344" width="116.719" height="116.438" fill="url(#paint1_linear_116:1140)"></rect>
+        <path opacity="0.5" d="M172.688 110.344L229.219 51V167.601L172.688 226.781V110.344Z" stroke="url(#paint2_linear_116:1140)"></path>
+        <path opacity="0.1" d="M172.688 110.344L229.219 51V167.601L172.688 226.781V110.344Z" fill="url(#paint3_linear_116:1140)"></path>
+        <path opacity="0.5" d="M0 169.619L56.25 110.344V226.85L0 286.125V169.619Z" stroke="url(#paint4_linear_116:1140)"></path>
+        <path opacity="0.1" d="M0 169.619L56.25 110.344V226.85L0 286.125V169.619Z" fill="url(#paint5_linear_116:1140)"></path>
+        <rect opacity="0.5" x="228.938" y="51.2812" width="119.25" height="116.438" stroke="url(#paint6_linear_116:1140)"></rect>
+        <rect opacity="0.1" x="228.938" y="51.2812" width="119.25" height="116.438" fill="url(#paint7_linear_116:1140)"></rect>
+        <path opacity="0.5" d="M347.906 51.2812L405 2V110.113L347.906 167.719V51.2812Z" stroke="url(#paint8_linear_116:1140)"></path>
+        <path opacity="0.1" d="M347.906 51.2812L405 2V110.113L347.906 167.719V51.2812Z" fill="url(#paint9_linear_116:1140)"></path>
+      </g>
+      <defs>
+        <linearGradient id="paint0_linear_116:1140" x1="49.0781" y1="112.313" x2="148.922" y2="131.859" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7" stop-opacity="0"></stop>
+          <stop offset="1" stop-color="#4A6CF7"></stop>
+        </linearGradient>
+        <linearGradient id="paint1_linear_116:1140" x1="179.141" y1="209.062" x2="32.6026" y2="145.47" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7"></stop>
+          <stop offset="1" stop-color="#4A6CF7" stop-opacity="0"></stop>
+        </linearGradient>
+        <linearGradient id="paint2_linear_116:1140" x1="170.016" y1="125.25" x2="217.542" y2="125.507" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7" stop-opacity="0"></stop>
+          <stop offset="1" stop-color="#4A6CF7"></stop>
+        </linearGradient>
+        <linearGradient id="paint3_linear_116:1140" x1="233.578" y1="113.156" x2="146.509" y2="143.95" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7"></stop>
+          <stop offset="1" stop-color="#4A6CF7" stop-opacity="0"></stop>
+        </linearGradient>
+        <linearGradient id="paint4_linear_116:1140" x1="-3.45633" y1="113.316" x2="46.311" y2="116.426" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7" stop-opacity="0"></stop>
+          <stop offset="1" stop-color="#4A6CF7"></stop>
+        </linearGradient>
+        <linearGradient id="paint5_linear_116:1140" x1="69.8907" y1="189.234" x2="84.0124" y2="249.947" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7"></stop>
+          <stop offset="1" stop-color="#4A6CF7" stop-opacity="0"></stop>
+        </linearGradient>
+        <linearGradient id="paint6_linear_116:1140" x1="218.953" y1="157.453" x2="330.261" y2="148.369" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7" stop-opacity="0"></stop>
+          <stop offset="1" stop-color="#4A6CF7"></stop>
+        </linearGradient>
+        <linearGradient id="paint7_linear_116:1140" x1="348.187" y1="46.6406" x2="280.112" y2="168.552" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7"></stop>
+          <stop offset="1" stop-color="#4A6CF7" stop-opacity="0"></stop>
+        </linearGradient>
+        <linearGradient id="paint8_linear_116:1140" x1="329" y1="190" x2="369.525" y2="-29.8829" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7" stop-opacity="0"></stop>
+          <stop offset="1" stop-color="#4A6CF7"></stop>
+        </linearGradient>
+        <linearGradient id="paint9_linear_116:1140" x1="409" y1="10" x2="331.729" y2="34.2741" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7"></stop>
+          <stop offset="1" stop-color="#4A6CF7" stop-opacity="0"></stop>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+  <div class="hidden sm:block absolute top-0 right-0 z-[-1]">
+    <svg width="406" height="286" viewBox="0 0 406 286" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g opacity="0.5">
+        <rect opacity="0.5" x="57.25" y="108.344" width="116.719" height="116.438" stroke="url(#paint0_linear_116:1151)"></rect>
+        <rect opacity="0.1" x="57.25" y="108.344" width="116.719" height="116.438" fill="url(#paint1_linear_116:1151)"></rect>
+        <path opacity="0.5" d="M173.688 108.344L230.219 49V165.601L173.688 224.781V108.344Z" stroke="url(#paint2_linear_116:1151)"></path>
+        <path opacity="0.1" d="M173.688 108.344L230.219 49V165.601L173.688 224.781V108.344Z" fill="url(#paint3_linear_116:1151)"></path>
+        <path opacity="0.5" d="M1 167.619L57.25 108.344V224.85L1 284.125V167.619Z" stroke="url(#paint4_linear_116:1151)"></path>
+        <path opacity="0.1" d="M1 167.619L57.25 108.344V224.85L1 284.125V167.619Z" fill="url(#paint5_linear_116:1151)"></path>
+        <rect opacity="0.5" x="229.938" y="49.2812" width="119.25" height="116.438" stroke="url(#paint6_linear_116:1151)"></rect>
+        <rect opacity="0.1" x="229.938" y="49.2812" width="119.25" height="116.438" fill="url(#paint7_linear_116:1151)"></rect>
+        <path opacity="0.5" d="M348.906 49.2812L406 0V108.113L348.906 165.719V49.2812Z" stroke="url(#paint8_linear_116:1151)"></path>
+        <path opacity="0.1" d="M348.906 49.2812L406 0V108.113L348.906 165.719V49.2812Z" fill="url(#paint9_linear_116:1151)"></path>
+      </g>
+      <defs>
+        <linearGradient id="paint0_linear_116:1151" x1="50.0781" y1="110.313" x2="149.922" y2="129.859" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7" stop-opacity="0"></stop>
+          <stop offset="1" stop-color="#4A6CF7"></stop>
+        </linearGradient>
+        <linearGradient id="paint1_linear_116:1151" x1="180.141" y1="207.062" x2="33.6026" y2="143.47" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7"></stop>
+          <stop offset="1" stop-color="#4A6CF7" stop-opacity="0"></stop>
+        </linearGradient>
+        <linearGradient id="paint2_linear_116:1151" x1="171.016" y1="123.25" x2="218.542" y2="123.507" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7" stop-opacity="0"></stop>
+          <stop offset="1" stop-color="#4A6CF7"></stop>
+        </linearGradient>
+        <linearGradient id="paint3_linear_116:1151" x1="234.578" y1="111.156" x2="147.509" y2="141.95" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7"></stop>
+          <stop offset="1" stop-color="#4A6CF7" stop-opacity="0"></stop>
+        </linearGradient>
+        <linearGradient id="paint4_linear_116:1151" x1="85.5" y1="71.5" x2="100.174" y2="270.716" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7" stop-opacity="0"></stop>
+          <stop offset="1" stop-color="#4A6CF7"></stop>
+        </linearGradient>
+        <linearGradient id="paint5_linear_116:1151" x1="70.8907" y1="187.234" x2="85.0124" y2="247.947" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7"></stop>
+          <stop offset="1" stop-color="#4A6CF7" stop-opacity="0"></stop>
+        </linearGradient>
+        <linearGradient id="paint6_linear_116:1151" x1="219.953" y1="155.453" x2="331.261" y2="146.369" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7" stop-opacity="0"></stop>
+          <stop offset="1" stop-color="#4A6CF7"></stop>
+        </linearGradient>
+        <linearGradient id="paint7_linear_116:1151" x1="349.187" y1="44.6406" x2="281.112" y2="166.552" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7"></stop>
+          <stop offset="1" stop-color="#4A6CF7" stop-opacity="0"></stop>
+        </linearGradient>
+        <linearGradient id="paint8_linear_116:1151" x1="394.75" y1="64.3284" x2="409.531" y2="110.901" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7" stop-opacity="0"></stop>
+          <stop offset="1" stop-color="#4A6CF7"></stop>
+        </linearGradient>
+        <linearGradient id="paint9_linear_116:1151" x1="410" y1="8.00001" x2="332.729" y2="32.2741" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4A6CF7"></stop>
+          <stop offset="1" stop-color="#4A6CF7" stop-opacity="0"></stop>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+</section>
 
-<!--    <div class="absolute left-2 bottom-2 w-full">-->
-<!--      <h1 class="text-3xl font-bold text-gray-200">{{course.name}}</h1>-->
-<!--      <h1 class="text-2xl font-semibold text-gray-200">{{course.section}}</h1>-->
-<!--    </div>-->
-
-<!--    <div class="absolute right-2 bottom-2 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">-->
-<!--      <button (click)="joinCourse()" *ngIf="!isInCourse && loginedUser" type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-green-700 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">-->
-<!--        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-ml-1 mr-3 h-5 w-5">-->
-<!--          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />-->
-<!--        </svg>-->
-<!--        Join to course-->
-<!--      </button>-->
-<!--      <button (click)="leaveCourse()" *ngIf="isInCourse && loginedUser && owner.user.email !== loginedUser.email" type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">-->
-<!--        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-ml-1 mr-3 h-5 w-5">-->
-<!--          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />-->
-<!--        </svg>-->
-<!--        Leave from course-->
-<!--      </button>-->
-<!--      <button *ngIf="isInCourse && loginedUser && owner.user.email === loginedUser.email" type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">-->
-<!--        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-ml-1 mr-3 h-5 w-5">-->
-<!--          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />-->
-<!--        </svg>-->
-<!--        Delete course-->
-<!--      </button>-->
-<!--    </div>-->
-
-<!--    <div *ngIf="loginedUser?.email === owner.user.email" class="absolute right-2 top-3">-->
-<!--      <button type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700">-->
-<!--        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2 -ml-1">-->
-<!--          <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />-->
-<!--        </svg>-->
-<!--        Setup-->
-<!--      </button>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<!--<div *ngIf="isInCourse" class="grid grid-cols-5 grid-rows-2 gap-x-0 gap-y-0">-->
-<!--  <div class="relative h-[130px] dark:bg-gray-700 p-6 mt-6 mr-5 border-2 border-gray-300 rounded-2xl">-->
-<!--    <h1 class="text-xl font-semibold text-black dark:text-gray-200">Course code</h1>-->
-<!--    <h1 class="text-2xl font-bold text-blue-500">{{course?.code}}</h1>-->
-<!--  </div>-->
-
-<!--  <form *ngIf="loginedUser?.email === owner.user.email" class="col-span-4 mt-6 relative">-->
-<!--    <div class="border border-gray-300 rounded-lg shadow-sm overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">-->
-<!--      <label for="title" class="sr-only">Title</label>-->
-<!--      <input type="text" name="title" id="title" class="block dark:bg-gray-700 w-full border-0 pt-2.5 text-lg font-medium placeholder-gray-500 dark:placeholder-gray-200 dark:text-white focus:ring-0" placeholder="Title">-->
-<!--      <label for="description" class="sr-only">Description</label>-->
-<!--      <textarea rows="5" name="description" id="description" class="block dark:bg-gray-700 w-full border-0 py-0 resize-none placeholder-gray-500 dark:placeholder-gray-200 dark:text-white focus:ring-0 sm:text-sm" placeholder="Write a description..."></textarea>-->
-
-<!--      <div aria-hidden="true" class="dark:bg-gray-700">-->
-<!--        <div class="py-2">-->
-<!--          <div class="h-9"></div>-->
-<!--        </div>-->
-<!--        <div class="h-px"></div>-->
-<!--        <div class="py-2">-->
-<!--          <div class="py-px">-->
-<!--            <div class="h-9"></div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-
-<!--    <div class="absolute bottom-0 inset-x-px">-->
-<!--      <div class="flex flex-nowrap justify-end py-2 px-2 space-x-2 sm:px-3">-->
-<!--        <div class="flex-shrink-0">-->
-<!--          <label id="listbox-label" class="sr-only"> Assign </label>-->
-<!--          <div class="relative">-->
-<!--            <button type="button" class="relative inline-flex items-center rounded-full py-2 px-2 bg-gray-50 text-sm font-medium text-gray-500 whitespace-nowrap hover:bg-gray-100 sm:px-3" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">-->
-<!--              &lt;!&ndash;-->
-<!--                Placeholder icon, show/hide based on listbox state.-->
-
-<!--                Heroicon name: solid/user-circle-->
-<!--              &ndash;&gt;-->
-<!--              <svg class="flex-shrink-0 h-5 w-5 text-gray-300 sm:-ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">-->
-<!--                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />-->
-<!--              </svg>-->
-
-<!--              &lt;!&ndash; Selected user avatar, show/hide based on listbox state. &ndash;&gt;-->
-<!--              <img src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="flex-shrink-0 h-5 w-5 rounded-full">-->
-
-<!--              &lt;!&ndash; Selected: "text-gray-900" &ndash;&gt;-->
-<!--              <span class="hidden truncate sm:ml-2 sm:block"> Assign </span>-->
-<!--            </button>-->
-
-<!--            &lt;!&ndash;-->
-<!--              Select popover, show/hide based on select state.-->
-
-<!--              Entering: ""-->
-<!--                From: ""-->
-<!--                To: ""-->
-<!--              Leaving: "transition ease-in duration-100"-->
-<!--                From: "opacity-100"-->
-<!--                To: "opacity-0"-->
-<!--            &ndash;&gt;-->
-<!--            <ul class="hidden absolute right-0 z-10 mt-1 w-52 bg-white shadow max-h-56 rounded-lg py-3 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-0">-->
-<!--              &lt;!&ndash;-->
-<!--                Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.-->
-
-<!--                Highlighted: "bg-gray-100", Not Highlighted: "bg-white"-->
-<!--              &ndash;&gt;-->
-<!--              <li class="bg-white cursor-default select-none relative py-2 px-3" id="listbox-option-0" role="option">-->
-<!--                <div class="flex items-center">-->
-<!--                  &lt;!&ndash; Heroicon name: solid/user-circle &ndash;&gt;-->
-<!--                  <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">-->
-<!--                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />-->
-<!--                  </svg>-->
-<!--                  <span class="ml-3 block font-medium truncate"> Unassigned </span>-->
-<!--                </div>-->
-<!--              </li>-->
-
-<!--              &lt;!&ndash;-->
-<!--                Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.-->
-
-<!--                Highlighted: "bg-gray-100", Not Highlighted: "bg-white"-->
-<!--              &ndash;&gt;-->
-<!--              <li class="bg-white cursor-default select-none relative py-2 px-3" id="listbox-option-1" role="option">-->
-<!--                <div class="flex items-center">-->
-<!--                  <img src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="flex-shrink-0 h-5 w-5 rounded-full">-->
-<!--                  <span class="ml-3 block font-medium truncate"> Wade Cooper </span>-->
-<!--                </div>-->
-<!--              </li>-->
-
-<!--              &lt;!&ndash; More items... &ndash;&gt;-->
-<!--            </ul>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--        <div class="flex-shrink-0">-->
-<!--          <label id="listbox-label" class="sr-only"> Add a label </label>-->
-<!--          <div class="relative">-->
-<!--            <button type="button" class="relative inline-flex items-center rounded-full py-2 px-2 bg-gray-50 text-sm font-medium text-gray-500 whitespace-nowrap hover:bg-gray-100 sm:px-3" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">-->
-<!--              &lt;!&ndash;-->
-<!--                Heroicon name: solid/tag-->
-
-<!--                Selected: "text-gray-300", Default: "text-gray-500"-->
-<!--              &ndash;&gt;-->
-<!--              <svg class="text-gray-300 flex-shrink-0 h-5 w-5 sm:-ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">-->
-<!--                <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />-->
-<!--              </svg>-->
-<!--              &lt;!&ndash; Selected: "text-gray-900" &ndash;&gt;-->
-<!--              <span class="hidden truncate sm:ml-2 sm:block"> Label </span>-->
-<!--            </button>-->
-
-<!--            &lt;!&ndash;-->
-<!--              Select popover, show/hide based on select state.-->
-
-<!--              Entering: ""-->
-<!--                From: ""-->
-<!--                To: ""-->
-<!--              Leaving: "transition ease-in duration-100"-->
-<!--                From: "opacity-100"-->
-<!--                To: "opacity-0"-->
-<!--            &ndash;&gt;-->
-<!--            <ul class="hidden absolute right-0 z-10 mt-1 w-52 bg-white shadow max-h-56 rounded-lg py-3 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-0">-->
-<!--              &lt;!&ndash;-->
-<!--                Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.-->
-
-<!--                Highlighted: "bg-gray-100", Not Highlighted: "bg-white"-->
-<!--              &ndash;&gt;-->
-<!--              <li class="bg-white cursor-default select-none relative py-2 px-3" id="listbox-option-0" role="option">-->
-<!--                <div class="flex items-center">-->
-<!--                  <span class="block font-medium truncate"> Unlabelled </span>-->
-<!--                </div>-->
-<!--              </li>-->
-
-<!--              &lt;!&ndash;-->
-<!--                Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.-->
-
-<!--                Highlighted: "bg-gray-100", Not Highlighted: "bg-white"-->
-<!--              &ndash;&gt;-->
-<!--              <li class="bg-white cursor-default select-none relative py-2 px-3" id="listbox-option-1" role="option">-->
-<!--                <div class="flex items-center">-->
-<!--                  <span class="block font-medium truncate"> Engineering </span>-->
-<!--                </div>-->
-<!--              </li>-->
-
-<!--              &lt;!&ndash; More items... &ndash;&gt;-->
-<!--            </ul>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--        <div class="flex-shrink-0">-->
-<!--          <label id="listbox-label" class="sr-only"> Add a due date </label>-->
-<!--          <div class="relative">-->
-<!--            <button type="button" class="relative inline-flex items-center rounded-full py-2 px-2 bg-gray-50 text-sm font-medium text-gray-500 whitespace-nowrap hover:bg-gray-100 sm:px-3" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">-->
-<!--              &lt;!&ndash;-->
-<!--                Heroicon name: solid/calendar-->
-
-<!--                Selected: "text-gray-300", Default: "text-gray-500"-->
-<!--              &ndash;&gt;-->
-<!--              <svg class="text-gray-300 flex-shrink-0 h-5 w-5 sm:-ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">-->
-<!--                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />-->
-<!--              </svg>-->
-<!--              &lt;!&ndash; Selected: "text-gray-900" &ndash;&gt;-->
-<!--              <span class="hidden truncate sm:ml-2 sm:block"> Due date </span>-->
-<!--            </button>-->
-
-<!--            &lt;!&ndash;-->
-<!--              Select popover, show/hide based on select state.-->
-
-<!--              Entering: ""-->
-<!--                From: ""-->
-<!--                To: ""-->
-<!--              Leaving: "transition ease-in duration-100"-->
-<!--                From: "opacity-100"-->
-<!--                To: "opacity-0"-->
-<!--            &ndash;&gt;-->
-<!--            <ul class="hidden absolute right-0 z-10 mt-1 w-52 bg-white shadow max-h-56 rounded-lg py-3 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-0">-->
-<!--              &lt;!&ndash;-->
-<!--                Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.-->
-
-<!--                Highlighted: "bg-gray-100", Not Highlighted: "bg-white"-->
-<!--              &ndash;&gt;-->
-<!--              <li class="bg-white cursor-default select-none relative py-2 px-3" id="listbox-option-0" role="option">-->
-<!--                <div class="flex items-center">-->
-<!--                  <span class="block font-medium truncate"> No due date </span>-->
-<!--                </div>-->
-<!--              </li>-->
-
-<!--              &lt;!&ndash;-->
-<!--                Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.-->
-
-<!--                Highlighted: "bg-gray-100", Not Highlighted: "bg-white"-->
-<!--              &ndash;&gt;-->
-<!--              <li class="bg-white cursor-default select-none relative py-2 px-3" id="listbox-option-1" role="option">-->
-<!--                <div class="flex items-center">-->
-<!--                  <span class="block font-medium truncate"> Today </span>-->
-<!--                </div>-->
-<!--              </li>-->
-
-<!--              &lt;!&ndash; More items... &ndash;&gt;-->
-<!--            </ul>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="border-t border-gray-200 px-2 py-2 flex justify-between items-center space-x-3 sm:px-3">-->
-<!--        <div class="flex">-->
-<!--          <button type="button" class="-ml-2 -my-2 rounded-full px-3 py-2 inline-flex items-center text-left text-gray-400 group">-->
-<!--            <svg class="-ml-1 h-5 w-5 mr-2 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">-->
-<!--              <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />-->
-<!--            </svg>-->
-<!--            <span class="text-sm text-gray-500 group-hover:text-gray-600 italic">Attach a file</span>-->
-<!--          </button>-->
-<!--        </div>-->
-<!--        <div class="flex-shrink-0">-->
-<!--          <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Publish</button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </form>-->
-
-<!--</div>-->
-
-
-<section class="pt-[180px] pb-[120px] overflow-hidden">
+<section *ngIf="isInCourse || !course?.isOnlyForCodeAccess" class="pt-[180px] pb-[120px] overflow-hidden">
   <div class="container">
     <div class="flex flex-wrap mx-[-16px]">
       <div class="w-full lg:w-8/12 px-4">
@@ -280,7 +182,7 @@
             <div *ngIf="loginedUser?.email === owner.user?.email" class="absolute bottom-3 right-5 z-10">
               <label for="cover"
                      class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-[4px] border border-white border-opacity-35 bg-white bg-opacity-30 text-white hover:bg-opacity-20">
-                <input type="file" name="cover" id="cover" class="hidden">
+                <input type="file" accept="image/png, image/jpg, image/jpeg" name="cover" id="cover" class="hidden" (change)="cropperComponent.show($event, 1920, 400, changeBackgroundImage.bind(this))">
                 <span>
             <svg width="16" height="16" viewBox="0 0 16 16" class="fill-white">
               <path fill-rule="evenodd" clip-rule="evenodd"
@@ -293,17 +195,118 @@
             </div>
           </div>
           <div class="flex flex-wrap items-center justify-between pb-4 mt-10 mb-10 border-b border-[#959cb1] border-opacity-10 dark:border-white dark:border-opacity-10">
-            <div class="flex flex-wrap items-center">
+            <div class="flex flex-wrap items-center" [ngClass]="{'mx-auto':isEditing}">
               <div class="flex items-center mr-10 mb-5">
-                <div class="w-full flex space-x-10">
+                <div class="w-full flex space-x-10" *ngIf="!isEditing">
                   <h3 class="font-bold text-black dark:text-white font-xl sm:text-2xl lg:text-xl xl:text-2xl leading-tight sm:leading-tight lg:leading-tight xl:leading-tight">
                     {{course?.name}}
                   </h3>
                   <span *ngIf="course?.section" class="bg-[#4a6cf7] rounded-full inline-flex items-center justify-center py-2 px-4 font-semibold text-sm text-white"> {{course?.section}} </span>
                 </div>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full grid grid-cols-2" *ngIf="isEditing">
+                  <div class="mb-8 mr-8">
+                    <label class="block text-sm font-medium mb-3"
+                           [ngClass]="{
+                      'label-invalid': submitted && f['name'].errors,
+                      'label-valid': submitted &&  !f['name'].errors,
+                      'text-[#1d2144] dark:text-white': !submitted
+                     }"
+                           for="name">
+                      Course Name
+                    </label>
+                    <input type="text" id="name"
+                           formControlName="name"
+                           placeholder="Enter Course Name"
+                           class="w-full dark:bg-[#242B51] border border-transparent rounded-md shadow-one py-3 px-6 text-base outline-none focus-visible:shadow-none"
+                           [ngClass]="{
+                                'input-invalid': submitted && f['name'].errors,
+                                'input-valid': submitted &&  !f['name'].errors,
+                                'text-[#959cb1] placeholder-[#959cb1] focus:border-[#4a6cf7]': !submitted
+                                }">
+                    <p *ngIf="submitted && f['name'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
+                      <span *ngIf="f['name'].errors?.['required']">Course Name is required</span>
+                    </p>
+                  </div>
+                  <div class="mb-8">
+                    <label class="block text-sm font-medium mb-3"
+                           [ngClass]="{
+                      'label-invalid': submitted && f['section'].errors,
+                      'label-valid': submitted &&  !f['section'].errors,
+                      'text-[#1d2144] dark:text-white': !submitted
+                     }"
+                           for="section">
+                      Section
+                    </label>
+                    <input type="text" id="section"
+                           formControlName="section"
+                           placeholder="Enter Section"
+                           class="w-full dark:bg-[#242B51] border border-transparent rounded-md shadow-one py-3 px-6 text-base outline-none focus-visible:shadow-none"
+                           [ngClass]="{
+                                'input-invalid': submitted && f['section'].errors,
+                                'input-valid': submitted &&  !f['section'].errors,
+                                'text-[#959cb1] placeholder-[#959cb1] focus:border-[#4a6cf7]': !submitted
+                                }">
+                  </div>
+                  <div class="mb-8 col-start-1 col-span-2">
+                    <label class="block text-sm font-medium mb-3"
+                           [ngClass]="{
+                      'label-invalid': submitted && f['description'].errors,
+                      'label-valid': submitted &&  !f['description'].errors,
+                      'text-[#1d2144] dark:text-white': !submitted
+                     }"
+                           for="description">
+                      Description
+                    </label>
+                    <textarea type="text" id="description"
+                              formControlName="description"
+                              placeholder="Enter Description"
+                              rows="7"
+                              class="w-full dark:bg-[#242B51] border border-transparent rounded-md shadow-one py-3 px-6 text-base outline-none focus-visible:shadow-none resize-none"
+                              [ngClass]="{
+                                'input-invalid': submitted && f['description'].errors,
+                                'input-valid': submitted &&  !f['description'].errors,
+                                'text-[#959cb1] placeholder-[#959cb1] focus:border-[#4a6cf7]': !submitted
+                                }">
+              </textarea>
+                  </div>
+                  <div class="flex col-start-1 items-center justify-between">
+                    <div>
+                      <label class="flex items-center cursor-pointer text-[#959cb1] text-sm font-medium select-none"
+                             for="isOnlyForCodeAccess">
+                        <div class="relative">
+                          <input class="sr-only" id="isOnlyForCodeAccess" formControlName="isOnlyForCodeAccess" type="checkbox" #checkbox>
+                          <div
+                            class="box flex items-center justify-center w-5 h-5 rounded border border-[#959cb1] border-opacity-20 dark:border-white dark:border-opacity-10 mr-4">
+                      <span [ngClass]="{'opacity-0':!checkbox.checked}">
+                      <svg fill="none" height="8" viewBox="0 0 11 8" width="11" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M10.0915 0.951972L10.0867 0.946075L10.0813 0.940568C9.90076 0.753564 9.61034 0.753146 9.42927 0.939309L4.16201 6.22962L1.58507 3.63469C1.40401 3.44841 1.11351 3.44879 0.932892 3.63584C0.755703 3.81933 0.755703 4.10875 0.932892 4.29224L0.932878 4.29225L0.934851 4.29424L3.58046 6.95832C3.73676 7.11955 3.94983 7.2 4.1473 7.2C4.36196 7.2 4.55963 7.11773 4.71406 6.9584L10.0468 1.60234C10.2436 1.4199 10.2421 1.1339 10.0915 0.951972ZM4.2327 6.30081L4.2317 6.2998C4.23206 6.30015 4.23237 6.30049 4.23269 6.30082L4.2327 6.30081Z"
+                        fill="#3056D3" stroke="#3056D3" stroke-width="0.4"></path>
+                      </svg>
+                      </span>
+                          </div>
+                        </div>
+                        Make access to join only with code?
+                      </label>
+                    </div>
+                  </div>
+                  <div class="flex justify-center items-center ml-20 space-x-2">
+                    <button
+                      type="button"
+                      (click)="onReset()"
+                      class="w-full flex items-center justify-center text-base font-medium text-white bg-gray-700 py-4 px-9 hover:shadow-signUp hover:bg-opacity-80 transition duration-300 ease-in-out rounded-md">
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      class="w-full flex items-center justify-center text-base font-medium text-white bg-green-600 py-4 px-9 hover:shadow-signUp hover:bg-opacity-80 transition duration-300 ease-in-out rounded-md">
+                      Save
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
-            <div class="mb-5 flex space-x-4">
+            <div class="mb-5 flex space-x-4" *ngIf="!isEditing">
               <button type="button" *ngIf="loginedUser && !isInCourse" (click)="joinCourse()"
                       class="block text-base font-bold text-white bg-green-600 py-3 px-8 md:px-9 lg:px-6 xl:px-9 hover:shadow-signUp hover:bg-opacity-90 rounded-md transition ease-in-up duration-300">
                 Join
@@ -312,7 +315,8 @@
                       class="block text-base font-bold text-white bg-red-600 py-3 px-8 md:px-9 lg:px-6 xl:px-9 hover:shadow-signUp hover:bg-opacity-90 rounded-md transition ease-in-up duration-300">
                 Leave
               </button>
-              <button type="button" *ngIf="loginedUser?.email === owner.user.email"
+              <button type="button" *ngIf="!isEditing && loginedUser?.email === owner.user.email"
+                      (click)="isEditing = true"
                       class="block text-base font-bold text-white bg-yellow-500 py-3 px-8 md:px-9 lg:px-6 xl:px-9 hover:shadow-signUp hover:bg-opacity-90 rounded-md transition ease-in-up duration-300">
                 Edit
               </button>
@@ -454,3 +458,5 @@
     </div>
   </div>
 </section>
+
+<app-cropper #cropperComponent></app-cropper>

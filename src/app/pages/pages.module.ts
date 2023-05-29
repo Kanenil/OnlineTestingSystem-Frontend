@@ -13,6 +13,8 @@ import { CoursesComponent } from './courses/courses/courses.component';
 import { CourseComponent } from './courses/course/course.component';
 import { SettingsComponent } from './profile/settings/settings.component';
 import {GoogleSigninModule} from "../components/google-signin/google-signin.module";
+import {CropperModule} from "../components/cropper/cropper.module";
+import {PaginationModule} from "../components/pagination/pagination.module";
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import {GoogleSigninModule} from "../components/google-signin/google-signin.modu
     RouterLink,
     CourseModule,
     GoogleSigninModule,
+    CropperModule,
+    PaginationModule
   ],
   exports: [
     NotFoundComponent,

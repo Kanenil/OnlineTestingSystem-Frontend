@@ -1,0 +1,41 @@
+<ng-content></ng-content>
+
+<div class="flex flex-wrap mx-[-16px] animate-fadeInUp">
+  <div class="w-full px-4">
+    <ul class="flex items-center pt-8 justify-center">
+      <li class="mx-1">
+        <a [routerLink]="['.']" [queryParams]="{currentPage: currentPage - 1, countOnPage}"
+           [ngClass]="{
+              'disabled': currentPage - 1 < 1
+           }"
+           (click)="pageChanged(currentPage - 1)"
+           class="flex items-center justify-center rounded-md bg-[#959cb1] bg-opacity-[15%] hover:bg-[#4a6cf7] hover:bg-opacity-100 transition hover:text-white text-[#959cb1] px-4 text-sm min-w-[36px] h-9">
+          Prev
+        </a>
+      </li>
+
+      <li *ngFor="let page of paginationArray(pages)" class="mx-1">
+        <a [routerLink]="['.']" [queryParams]="{currentPage: page, countOnPage}"
+           (click)="pageChanged(page)"
+           [ngClass]="{
+              'bg-[#4a6cf7] hover:bg-opacity-[80%] bg-opacity-[100%] text-white': currentPage === page,
+              'bg-[#959cb1] hover:bg-[#4a6cf7] bg-opacity-[15%]': currentPage !== page
+           }"
+           class="flex items-center justify-center rounded-md hover:bg-opacity-100 transition hover:text-white text-[#959cb1] px-4 text-sm min-w-[36px] h-9">
+          {{page}}
+        </a>
+      </li>
+
+      <li class="mx-1">
+        <a [routerLink]="['.']" [queryParams]="{currentPage: currentPage + 1, countOnPage}"
+           [ngClass]="{
+              'disabled': currentPage + 1 > pages
+           }"
+           (click)="pageChanged(currentPage + 1)"
+           class="flex items-center justify-center rounded-md bg-[#959cb1] bg-opacity-[15%] hover:bg-[#4a6cf7] hover:bg-opacity-100 transition hover:text-white text-[#959cb1] px-4 text-sm min-w-[36px] h-9">
+          Next
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
