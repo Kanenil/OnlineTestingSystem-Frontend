@@ -28,6 +28,9 @@ export const ApiRouteKeys = {
     join: `${base}/courses/join`,
     leave: `${base}/courses/leave`,
   },
+  Tests: {
+    base: `${base}/tests`,
+  },
   Users: {
     base: `${base}/users`,
     id: `${base}/users/id`,

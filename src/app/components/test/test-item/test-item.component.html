@@ -1,0 +1,42 @@
+<div class="relative bg-white dark:bg-[#1d2144] shadow-md rounded-md overflow-hidden mb-10 animate-fadeInUp">
+  <div class="p-6 sm:p-8 md:py-8 md:px-6 lg:p-8 xl:py-8 xl:px-5 2xl:p-8">
+    <h3>
+      <a [routerLink]="['tests', test.id]"
+         class="font-bold text-black dark:text-white text-xl sm:text-2xl block mb-4 hover:text-[#4a6cf7] dark:hover:text-[#4a6cf7]">
+        {{test.name}}
+      </a>
+    </h3>
+    <p *ngIf="test.description"
+       class="text-base text-[#959cb1] font-medium pb-6 mb-6 border-b border-[#959cb1] border-opacity-10 dark:border-white dark:border-opacity-10">
+      {{test.description}}
+    </p>
+    <p *ngIf="!test.description"
+       class="text-base text-[#959cb1] font-medium pb-6 mb-6 border-b border-[#959cb1] border-opacity-10 dark:border-white dark:border-opacity-10">
+      No description to this test
+    </p>
+    <div class="flex items-center">
+<!--      <div-->
+<!--        class="flex items-center pr-5 mr-5 xl:pr-3 2xl:pr-5 xl:mr-3 2xl:mr-5 border-r border-[#959cb1] border-opacity-10 dark:border-white dark:border-opacity-10">-->
+<!--        <div class="max-w-[40px] w-full h-[40px] rounded-full overflow-hidden mr-4">-->
+<!--          <img *ngIf="owner.user.image" [src]="owner.user.image" alt="author" class="w-full">-->
+<!--          <span *ngIf="!owner.user.image"-->
+<!--                class="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-500">-->
+<!--                <span class="font-medium leading-none text-white">{{owner.user.firstName | slice:0:1}}</span>-->
+<!--              </span>-->
+<!--        </div>-->
+<!--        <div class="w-full">-->
+<!--          <h4 class="text-sm font-medium text-dark dark:text-white mb-1">-->
+<!--            <a [routerLink]="['/profile', owner.user.slug]"-->
+<!--               class="text-dark dark:text-white hover:text-[#4a6cf7] dark:hover:text-[#4a6cf7]">-->
+<!--              {{owner.user.firstName}} {{owner.user.lastName}} </a>-->
+<!--          </h4>-->
+<!--          <p class="text-xs text-[#959cb1]">Owner</p>-->
+<!--        </div>-->
+<!--      </div>-->
+      <div class="inline-block">
+        <h4 class="text-sm font-medium text-[#1d2144] dark:text-white mb-1">Questions</h4>
+        <p class="text-xs text-[#959cb1]">{{test.questions.length}}</p>
+      </div>
+    </div>
+  </div>
+</div>

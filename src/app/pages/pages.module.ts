@@ -15,6 +15,10 @@ import { SettingsComponent } from './profile/settings/settings.component';
 import {GoogleSigninModule} from "../components/google-signin/google-signin.module";
 import {CropperModule} from "../components/cropper/cropper.module";
 import {PaginationModule} from "../components/pagination/pagination.module";
+import {BaseModule} from "../components/common/base.module";
+import {TestComponent} from "./courses/test/test.component";
+import {TestModule} from "../components/test/test.module";
+import { ActiveTestComponent } from './active-test/active-test.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,8 @@ import {PaginationModule} from "../components/pagination/pagination.module";
     CoursesComponent,
     CourseComponent,
     SettingsComponent,
+    TestComponent,
+    ActiveTestComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +41,9 @@ import {PaginationModule} from "../components/pagination/pagination.module";
     CourseModule,
     GoogleSigninModule,
     CropperModule,
-    PaginationModule
+    PaginationModule,
+    BaseModule,
+    TestModule
   ],
   exports: [
     NotFoundComponent,

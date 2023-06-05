@@ -1,6 +1,7 @@
 import {ICourseModel} from "./course.model";
 import {IRoleModel} from "../role.model";
 import {IUserModel} from "../user/user.model";
+import {ITestModel} from "../test/test.model";
 
 export interface ICourseDetailsModel extends ICourseModel {
   code: string,
@@ -12,5 +13,6 @@ export interface ICourseDetailsModel extends ICourseModel {
       role: IRoleModel,
       user: IUserModel
     }
-  ]
+  ],
+  tests: ITestModel[]
 }

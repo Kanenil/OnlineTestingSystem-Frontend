@@ -164,9 +164,9 @@
     </svg>
   </div>
 </section>
-
-<section *ngIf="isInCourse || !course?.isOnlyForCodeAccess" class="pt-[180px] pb-[120px] overflow-hidden">
+<section *ngIf="isInCourse || !course?.isOnlyForCodeAccess" class="pt-[110px] pb-[120px] overflow-hidden animate-fadeInUp">
   <div class="container">
+    <breadcrumbs [items]="routes"></breadcrumbs>
     <div class="flex flex-wrap mx-[-16px]">
       <div class="w-full lg:w-8/12 px-4">
         <div *ngIf="owner">
@@ -369,20 +369,35 @@
 </svg>
 </span>
             </div>
+
+            <div *ngIf="isInCourse" class="flex flex-wrap items-center mx-[-16px]">
+              <div class="w-full md:w-8/12 lg:w-7/12 px-4">
+                <h1 class="font-bold text-black dark:text-white text-2xl sm:text-3xl mb-5">Tests</h1>
+              </div>
+              <div class="w-full md:w-4/12 lg:w-5/12 px-4">
+                <div class="text-end">
+                  <ul class="flex items-center md:justify-end">
+                    <button type="button"
+                            (click)="createTest()"
+                            *ngIf="loginedUser?.email === owner.user.email"
+                            class="hidden md:block text-base font-bold text-white bg-[#4a6cf7] py-3 px-8 md:px-9 lg:px-6 xl:px-9 hover:shadow-signUp hover:bg-opacity-90 rounded-md transition ease-in-up duration-300">
+                      Create test
+                    </button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="isInCourse" class="flex flex-wrap mx-[-16px] mt-8 justify-start">
+              <div *ngFor="let test of course?.tests" class="w-full md:w-2/3 lg:w-1/2 xl:w-1/3 px-4">
+                <app-test-item [test]="test"></app-test-item>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
       <div class="w-full lg:w-4/12 px-4">
-        <div class="bg-[#4a6cf7] bg-opacity-5 dark:bg-opacity-5 rounded-md mt-12 lg:mt-0 mb-10 p-6">
-          <form class="flex items-center justify-between">
-            <input type="text" placeholder="Search here..." class="w-full dark:bg-white dark:bg-opacity-10 rounded-md border border-transparent py-3 px-5 text-[#959cb1] palceholder-[#959cb1] font-medium text-base mr-5 outline-none focus:border-[#4a6cf7]">
-            <button class="max-w-[50px] w-full h-[50px] flex items-center justify-center rounded-md bg-[#4a6cf7] text-white">
-              <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19.4062 16.8125L13.9375 12.375C14.9375 11.0625 15.5 9.46875 15.5 7.78125C15.5 5.75 14.7188 3.875 13.2812 2.4375C10.3438 -0.5 5.5625 -0.5 2.59375 2.4375C1.1875 3.84375 0.40625 5.75 0.40625 7.75C0.40625 9.78125 1.1875 11.6562 2.625 13.0937C4.09375 14.5625 6.03125 15.3125 7.96875 15.3125C9.875 15.3125 11.75 14.5938 13.2188 13.1875L18.75 17.6562C18.8438 17.75 18.9688 17.7812 19.0938 17.7812C19.25 17.7812 19.4062 17.7188 19.5312 17.5938C19.6875 17.3438 19.6562 17 19.4062 16.8125ZM3.375 12.3438C2.15625 11.125 1.5 9.5 1.5 7.75C1.5 6 2.15625 4.40625 3.40625 3.1875C4.65625 1.9375 6.3125 1.3125 7.96875 1.3125C9.625 1.3125 11.2812 1.9375 12.5312 3.1875C13.75 4.40625 14.4375 6.03125 14.4375 7.75C14.4375 9.46875 13.7188 11.125 12.5 12.3438C10 14.8438 5.90625 14.8438 3.375 12.3438Z" fill="white"></path>
-              </svg>
-            </button>
-          </form>
-        </div>
         <div class="bg-[#4a6cf7] max-h-[660px] bg-opacity-5 dark:bg-opacity-10 rounded-md mb-10">
           <h3 class="font-semibold text-black dark:text-white text-lg py-4 px-8 border-b border-[#959cb1] border-opacity-10 dark:border-white dark:border-opacity-10">
             Joined Users
@@ -458,5 +473,4 @@
     </div>
   </div>
 </section>
-
 <app-cropper #cropperComponent></app-cropper>

@@ -15,6 +15,8 @@ import {convertBase64ToFile} from "../../../utils/converters";
 import {UploadService} from "../../../api/upload.service";
 import {IEditCourseModel} from "../../../models/course/edit-course.model";
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {ModalService} from "../../../services/modal.service";
+import {CreateTestComponent} from "../../../components/modal/create-test/create-test.component";
 
 @Component({
   selector: 'app-course',
@@ -35,6 +37,7 @@ export class CourseComponent implements OnInit {
     isOnlyForCodeAccess: new FormControl(false),
   });
   submitted = false;
+  routes = []
 
   constructor(
     private route: ActivatedRoute,
@@ -46,6 +49,7 @@ export class CourseComponent implements OnInit {
     private notifyService: NotificationService,
     private uploadService: UploadService,
     private formBuilder: FormBuilder,
+    private modalService: ModalService
   ) {
     eventBusService.on(EventNameKeys.Authorize, ()=>{
       this.loadUser();
@@ -78,6 +82,9 @@ export class CourseComponent implements OnInit {
           })
         }
         this.titleService.setTitle(`${this.course.name} - Smart Test`)
+
+        // @ts-ignore
+        this.routes = [{name:'Courses', link:["/courses"]}, {name: this.course?.name || '', link: ['/courses', this.course?.slug || '']}];
 
         this.form = this.formBuilder.group(
           {
@@ -198,4 +205,7 @@ export class CourseComponent implements OnInit {
     this.isEditing = false;
   }
 
+  createTest() {
+    this.modalService.show(CreateTestComponent);
+  }
 }

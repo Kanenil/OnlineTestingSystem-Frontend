@@ -11,12 +11,13 @@ import {CoursesComponent} from "./pages/courses/courses/courses.component";
 import {CourseComponent} from "./pages/courses/course/course.component";
 import {SettingsComponent} from "./pages/profile/settings/settings.component";
 import {AuthGuard} from "./guards/auth.guard";
+import {TestComponent} from "./pages/courses/test/test.component";
+import {ActiveTestComponent} from "./pages/active-test/active-test.component";
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivate: [IsSignedInGuard],
     data: {title: 'Home'}
   },
   {
@@ -52,6 +53,11 @@ const routes: Routes = [
         path: ':slug',
         component: CourseComponent,
       },
+      {
+        path: ':slug/tests/:id',
+        component: TestComponent,
+        canActivate: [AuthGuard]
+      },
     ]
   },
   {
@@ -68,7 +74,7 @@ const routes: Routes = [
       },
     ]
   },
-
+  {path: 'test', component: ActiveTestComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: '**', redirectTo: 'not-found'}
 ];
