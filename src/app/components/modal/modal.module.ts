@@ -10,6 +10,7 @@ import { CreateQuestionComponent } from './create-question/create-question.compo
 import {RouterLink} from "@angular/router";
 import { AnswersListComponent } from './answers-list/answers-list.component';
 import { CreateAnswerComponent } from './create-answer/create-answer.component';
+import {CourseModule} from "../course/course.module";
 
 
 
@@ -26,11 +27,12 @@ import { CreateAnswerComponent } from './create-answer/create-answer.component';
   exports: [
     ModalComponent
   ],
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        GoogleSigninModule,
-        RouterLink
-    ]
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    GoogleSigninModule,
+    RouterLink,
+    CourseModule
+  ]
 })
 export class ModalModule { }

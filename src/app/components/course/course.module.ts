@@ -17,10 +17,11 @@ import { UserCourseItemComponent } from './user-course-item/user-course-item.com
     CommonModule,
     RouterLink
   ],
-  exports: [
-    CourseItemComponent,
-    CourseItemSkeletonComponent,
-    UserCourseItemComponent
-  ]
+    exports: [
+        CourseItemComponent,
+        CourseItemSkeletonComponent,
+        UserCourseItemComponent,
+        TruncatePipe
+    ]
 })
 export class CourseModule { }

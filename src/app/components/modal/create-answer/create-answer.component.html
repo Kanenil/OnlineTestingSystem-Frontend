@@ -3,7 +3,7 @@
     <div class="flex flex-wrap mx-[-16px]">
       <div class="w-full px-4">
         <div class="min-w-[500px] max-w-[700px] mx-auto bg-[#4a6cf7] bg-opacity-5 dark:bg-[#1d2144] rounded-md p-12 sm:p-[60px]">
-          <h3 *ngIf="question" class="font-bold text-[#1d2144] dark:text-white text-2xl sm:text-3xl mb-3 text-center">Create answer to {{question.text}}</h3>
+          <h3 *ngIf="question" class="font-bold text-[#1d2144] dark:text-white text-2xl sm:text-3xl mb-3 text-center">Create answer to {{question.text| truncate:20}}</h3>
           <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="mb-8">
               <label class="block text-sm font-medium mb-3"
