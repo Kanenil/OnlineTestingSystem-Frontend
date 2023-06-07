@@ -30,6 +30,7 @@ export const ApiRouteKeys = {
   },
   Tests: {
     base: `${base}/tests`,
+    question: `${base}/tests/question`,
   },
   Users: {
     base: `${base}/users`,

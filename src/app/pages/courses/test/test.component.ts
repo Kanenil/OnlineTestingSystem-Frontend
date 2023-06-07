@@ -8,6 +8,8 @@ import {AccountService} from "../../../api/account.service";
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {NotificationService} from "../../../services/notification.service";
 import {TestService} from "../../../api/test.service";
+import {ModalService} from "../../../services/modal.service";
+import {QuestionsListComponent} from "../../../components/modal/questions-list/questions-list.component";
 
 @Component({
   selector: 'app-test',
@@ -34,7 +36,8 @@ export class TestComponent implements OnInit {
     private accountService: AccountService,
     private formBuilder: FormBuilder,
     private notifyService: NotificationService,
-    private testService: TestService
+    private testService: TestService,
+    private modalService: ModalService
   ) { }
 
   ngOnInit() {
@@ -134,4 +137,7 @@ export class TestComponent implements OnInit {
     this.isEditing = false;
   }
 
+  questionEditor() {
+    this.modalService.show(QuestionsListComponent);
+  }
 }

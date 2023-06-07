@@ -1,4 +1,4 @@
-import {IAnswerModel} from "./answer.model";
+import {IAnswerModel} from "../answer/answer.model";
 
 export interface IQuestionModel {
   id: number | string,

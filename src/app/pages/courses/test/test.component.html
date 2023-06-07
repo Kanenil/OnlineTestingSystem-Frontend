@@ -26,9 +26,9 @@
             </button>
           </div>
         </div>
-        <div class="max-w-[530px] mx-auto">
+        <div *ngIf="isEditing" class="max-w-[530px] mx-auto">
           <div class="flex items-center mr-10 mb-5">
-            <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full grid" *ngIf="isEditing">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full grid" >
               <div class="mb-8">
                 <label class="block text-sm font-medium mb-3"
                        [ngClass]="{
@@ -74,6 +74,12 @@
                                 }">
               </textarea>
               </div>
+              <button
+                type="button"
+                (click)="questionEditor()"
+                class="w-full mb-5 flex items-center justify-center text-base font-medium text-white bg-gray-700 py-4 px-9 hover:shadow-signUp hover:bg-opacity-80 transition duration-300 ease-in-out rounded-md">
+                Edit questions
+              </button>
               <div class="flex justify-center items-center ml-60 space-x-2">
                 <button
                   type="button"

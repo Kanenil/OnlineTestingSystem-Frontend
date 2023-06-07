@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CourseService} from "../../api/course.service";
 import {ITestModel} from "../../models/test/test.model";
-import {IQuestionModel} from "../../models/test/question.model";
-import {IAnswerModel} from "../../models/test/answer.model";
+import {IQuestionModel} from "../../models/test/question/question.model";
+import {IAnswerModel} from "../../models/test/answer/answer.model";
 
 @Component({
   selector: 'app-active-test',
