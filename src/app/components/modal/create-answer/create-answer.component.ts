@@ -1,21 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {ITestModel} from "../../../models/test/test.model";
 import {CourseService} from "../../../api/course.service";
 import {ModalService} from "../../../services/modal.service";
-import {Router} from "@angular/router";
-import {ITestModel} from "../../../models/test/test.model";
+import {ActivatedRoute, Router} from "@angular/router";
 import {TestService} from "../../../api/test.service";
 import {NotificationService} from "../../../services/notification.service";
 import {QuestionsListComponent} from "../questions-list/questions-list.component";
+import {IQuestionModel} from "../../../models/test/question/question.model";
+import {AnswersListComponent} from "../answers-list/answers-list.component";
 
 @Component({
-  selector: 'app-create-question',
-  templateUrl: './create-question.component.html'
+  selector: 'app-create-answer',
+  templateUrl: './create-answer.component.html'
 })
-export class CreateQuestionComponent implements OnInit {
-
+export class CreateAnswerComponent implements OnInit {
   form: FormGroup = new FormGroup({
     text: new FormControl(''),
+    isCorrect: new FormControl(false)
   });
   submitted = false;
 
@@ -23,6 +25,8 @@ export class CreateQuestionComponent implements OnInit {
   private course: ICourseDetailsModel;
   // @ts-ignore
   public test: ITestModel;
+  // @ts-ignore
+  public question: IQuestionModel | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,8 +34,10 @@ export class CreateQuestionComponent implements OnInit {
     public modalService: ModalService,
     private router: Router,
     private testService: TestService,
-    private notifyService: NotificationService
-  ) {}
+    private notifyService: NotificationService,
+    private route: ActivatedRoute
+  ) {
+  }
 
   ngOnInit() {
     const currentUrl = this.router.url;
@@ -50,6 +56,10 @@ export class CreateQuestionComponent implements OnInit {
         // @ts-ignore
         this.test = this.course.tests.find(x => x.id == id);
 
+        this.route.queryParams.subscribe(params => {
+          this.question = this.test.questions.find(x=>x.id == params[0]);
+        })
+
       }, error => {
         this.router.navigate(['/not-found'], {replaceUrl: true})
       }
@@ -58,6 +68,7 @@ export class CreateQuestionComponent implements OnInit {
     this.form = this.formBuilder.group(
       {
         text: ['', [Validators.required]],
+        isCorrect: [false],
       }
     );
   }
@@ -73,10 +84,9 @@ export class CreateQuestionComponent implements OnInit {
       return;
     }
 
-    this.testService.createQuestion({...this.form.value, testId: this.test.id}).subscribe(resp=>{
-      this.notifyService.showSuccess("Question successfully created","Question info");
-      this.modalService.show(QuestionsListComponent);
+    this.testService.createAnswer({...this.form.value, questionId: this.question?.id}).subscribe(resp=>{
+      this.notifyService.showSuccess("Answer successfully created","Answer info");
+      this.modalService.show(AnswersListComponent);
     })
   }
-
 }

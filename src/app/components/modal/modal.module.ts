@@ -8,6 +8,8 @@ import { CreateTestComponent } from './create-test/create-test.component';
 import { QuestionsListComponent } from './questions-list/questions-list.component';
 import { CreateQuestionComponent } from './create-question/create-question.component';
 import {RouterLink} from "@angular/router";
+import { AnswersListComponent } from './answers-list/answers-list.component';
+import { CreateAnswerComponent } from './create-answer/create-answer.component';
 
 
 
@@ -17,7 +19,9 @@ import {RouterLink} from "@angular/router";
     CreateCourseComponent,
     CreateTestComponent,
     QuestionsListComponent,
-    CreateQuestionComponent
+    CreateQuestionComponent,
+    AnswersListComponent,
+    CreateAnswerComponent
   ],
   exports: [
     ModalComponent

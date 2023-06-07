@@ -5,6 +5,7 @@ import {ITestUpdateModel} from "../models/test/test-update.model";
 import {ITestCreateModel} from "../models/test/test-create.model";
 import {IBaseResponseModel} from "../models/base-response.model";
 import {IQuestionCreateModel} from "../models/test/question/question-create.model";
+import {IAnswerCreateModel} from "../models/test/answer/answer-create.model";
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,18 @@ export class TestService {
 
   createQuestion(model: IQuestionCreateModel) {
     return this.http.post<IBaseResponseModel>(`${ApiRouteKeys.Tests.question}`, model);
+  }
+
+  createAnswer(model: IAnswerCreateModel) {
+    return this.http.post<IBaseResponseModel>(`${ApiRouteKeys.Tests.answer}`, model);
+  }
+
+  removeAnswer(id: number | string) {
+    return this.http.delete<any>(`${ApiRouteKeys.Tests.answer}/${id}`);
+  }
+
+  removeQuestion(id: number | string) {
+    return this.http.delete<any>(`${ApiRouteKeys.Tests.question}/${id}`);
   }
 
 }

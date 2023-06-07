@@ -1,0 +1,92 @@
+<section class="fixed z-50 top-16 left-1/2 -translate-x-1/2 overflow-hidden pb-[120px]">
+  <div class="container">
+    <div class="flex flex-wrap mx-[-16px]">
+      <div class="w-full px-4">
+        <div *ngIf="question"
+             class="min-w-[500px] max-w-[700px] mx-auto bg-[#4a6cf7] bg-opacity-5 dark:bg-[#1d2144] rounded-md p-12 sm:p-[60px]">
+
+          <div class="sm:flex sm:items-center mb-4">
+            <div class="sm:flex-auto">
+              <h1 class="text-xl font-semibold text-gray-900 dark:text-white">{{question.text}} answers</h1>
+            </div>
+            <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+              <button (click)="createAnswer()"
+                      type="button"
+                      class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
+                Add answer
+              </button>
+            </div>
+          </div>
+
+          <div *ngIf="question.answers.length > 0" class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+              <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" class="px-6 py-3">
+                  Answer
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Is Correct
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  <span class="sr-only">Edit</span>
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let answer of question.answers"
+                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  {{answer.text}}
+                </th>
+                <td class="px-6 py-4">
+                  <div>
+                    <label class="flex items-center cursor-pointer text-[#959cb1] text-sm font-medium select-none">
+                      <div class="relative">
+                        <input class="sr-only" readonly disabled [checked]="answer.isCorrect" type="checkbox">
+                        <div
+                          class="box flex items-center justify-center w-5 h-5 rounded border border-[#959cb1] border-opacity-20 dark:border-white dark:border-opacity-10 mr-4">
+                      <span [ngClass]="{'opacity-0':!answer.isCorrect}">
+                      <svg fill="none" height="8" viewBox="0 0 11 8" width="11" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M10.0915 0.951972L10.0867 0.946075L10.0813 0.940568C9.90076 0.753564 9.61034 0.753146 9.42927 0.939309L4.16201 6.22962L1.58507 3.63469C1.40401 3.44841 1.11351 3.44879 0.932892 3.63584C0.755703 3.81933 0.755703 4.10875 0.932892 4.29224L0.932878 4.29225L0.934851 4.29424L3.58046 6.95832C3.73676 7.11955 3.94983 7.2 4.1473 7.2C4.36196 7.2 4.55963 7.11773 4.71406 6.9584L10.0468 1.60234C10.2436 1.4199 10.2421 1.1339 10.0915 0.951972ZM4.2327 6.30081L4.2317 6.2998C4.23206 6.30015 4.23237 6.30049 4.23269 6.30082L4.2327 6.30081Z"
+                        fill="#3056D3" stroke="#3056D3" stroke-width="0.4"></path>
+                      </svg>
+                      </span>
+                        </div>
+                      </div>
+                    </label>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-right space-x-2">
+                  <a (click)="removeAnswer(answer.id)" class="cursor-pointer font-medium text-red-600 dark:text-red-500 hover:underline">Remove</a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <button (click)="createAnswer()" *ngIf="question.answers.length == 0" type="button" class="relative block w-full border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+            </svg>
+
+            <span class="mt-2 block text-sm font-medium text-gray-900 dark:text-white"> Create a new answer </span>
+          </button>
+
+
+        </div>
+      </div>
+    </div>
+    <button (click)="modalService.close()"
+            class="absolute right-2 top-2 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            data-modal-hide="defaultModal">
+      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+           xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+      </svg>
+    </button>
+  </div>
+</section>

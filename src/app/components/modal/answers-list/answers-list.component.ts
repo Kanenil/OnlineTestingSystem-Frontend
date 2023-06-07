@@ -1,27 +1,28 @@
 import {Component, OnInit} from '@angular/core';
-import {CourseService} from "../../../api/course.service";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ModalService} from "../../../services/modal.service";
-import {Router} from "@angular/router";
-import {ITestModel} from "../../../models/test/test.model";
-import {CreateQuestionComponent} from "../create-question/create-question.component";
-import {AnswersListComponent} from "../answers-list/answers-list.component";
+import {CourseService} from "../../../api/course.service";
+import {IQuestionModel} from "../../../models/test/question/question.model";
+import {CreateAnswerComponent} from "../create-answer/create-answer.component";
 import {TestService} from "../../../api/test.service";
 
 @Component({
-  selector: 'app-questions-list',
-  templateUrl: './questions-list.component.html'
+  selector: 'app-answers-list',
+  templateUrl: './answers-list.component.html'
 })
-export class QuestionsListComponent implements OnInit {
-
-  // @ts-ignore
+export class AnswersListComponent implements OnInit {
+// @ts-ignore
   private course: ICourseDetailsModel;
   // @ts-ignore
-  public test: ITestModel;
+  private test: ITestModel;
+  // @ts-ignore
+  public question: IQuestionModel;
 
   constructor(
     private courseService: CourseService,
     public modalService: ModalService,
     private router: Router,
+    private route: ActivatedRoute,
     private testService: TestService
   ) {}
 
@@ -46,22 +47,24 @@ export class QuestionsListComponent implements OnInit {
         // @ts-ignore
         this.test = this.course.tests.find(x => x.id == id);
 
+        this.route.queryParams.subscribe(params => {
+
+          // @ts-ignore
+          this.question = this.test.questions.find(x => x.id == params[0]);
+        })
+
       }, error => {
         this.router.navigate(['/not-found'], {replaceUrl: true})
       }
     )
   }
 
-  createQuestion() {
-    this.modalService.show(CreateQuestionComponent);
+  createAnswer() {
+    this.modalService.show(CreateAnswerComponent);
   }
 
-  openAnswers() {
-    this.modalService.show(AnswersListComponent);
-  }
-
-  removeQuestion(id: number | string) {
-    this.testService.removeQuestion(id).subscribe(()=>{
+  removeAnswer(id: number | string) {
+    this.testService.removeAnswer(id).subscribe(()=>{
       this.loadData();
     })
   }
